@@ -25,7 +25,8 @@ namespace Test
 
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            Data d = new Data();
+            
         }
     }
 }
