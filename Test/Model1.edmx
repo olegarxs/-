@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JournalDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="JournalDBModelStoreContainer">
+          <EntitySet Name="Data" EntityType="JournalDBModel.Store.Data" store:Type="Tables" store:Schema="dbo" store:Name="Data">
+            <DefiningQuery>SELECT 
+      [Data].[id] AS [id], 
+      [Data].[name] AS [name], 
+      [Data].[applicationDateAndTime] AS [applicationDateAndTime], 
+      [Data].[dateAndTimeOfCarProvision] AS [dateAndTimeOfCarProvision], 
+      [Data].[purposesOfUsingAuto] AS [purposesOfUsingAuto], 
+      [Data].[route] AS [route], 
+      [Data].[nameDocument] AS [nameDocument], 
+      [Data].[lastName] AS [lastName], 
+      [Data].[cargo] AS [cargo], 
+      [Data].[applicationStatus] AS [applicationStatus]
+      FROM [dbo].[Data] AS [Data]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Driver" EntityType="JournalDBModel.Store.Driver" store:Type="Tables" store:Schema="dbo" store:Name="Driver">
+            <DefiningQuery>SELECT 
+      [Driver].[id_driver] AS [id_driver], 
+      [Driver].[name] AS [name]
+      FROM [dbo].[Driver] AS [Driver]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Ошибки, обнаруженные при создании:
+      предупреждение 6002: В таблице или представлении "JournalDB.dbo.Data" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
+      -->
+        <EntityType Name="Data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="applicationDateAndTime" />
+            <PropertyRef Name="dateAndTimeOfCarProvision" />
+            <PropertyRef Name="purposesOfUsingAuto" />
+            <PropertyRef Name="route" />
+            <PropertyRef Name="nameDocument" />
+            <PropertyRef Name="lastName" />
+            <PropertyRef Name="cargo" />
+            <PropertyRef Name="applicationStatus" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="applicationDateAndTime" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="dateAndTimeOfCarProvision" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="purposesOfUsingAuto" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="route" Type="nchar" Nullable="false" MaxLength="200" />
+          <Property Name="nameDocument" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="lastName" Type="nchar" Nullable="false" MaxLength="50" />
+          <Property Name="cargo" Type="nchar" Nullable="false" MaxLength="50" />
+          <Property Name="applicationStatus" Type="nchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+      предупреждение 6002: В таблице или представлении "JournalDB.dbo.Driver" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
+      -->
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="id_driver" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id_driver" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JournalDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="JournalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Data" EntityType="JournalDBModel.Data" />
+          <EntitySet Name="Driver" EntityType="JournalDBModel.Driver" />
+        </EntityContainer>
+        <EntityType Name="Data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="applicationDateAndTime" />
+            <PropertyRef Name="dateAndTimeOfCarProvision" />
+            <PropertyRef Name="purposesOfUsingAuto" />
+            <PropertyRef Name="route" />
+            <PropertyRef Name="nameDocument" />
+            <PropertyRef Name="lastName" />
+            <PropertyRef Name="cargo" />
+            <PropertyRef Name="applicationStatus" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="applicationDateAndTime" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="dateAndTimeOfCarProvision" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="purposesOfUsingAuto" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="route" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="true" />
+          <Property Name="nameDocument" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <Property Name="cargo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <Property Name="applicationStatus" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="id_driver" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
+          <EntitySetMapping Name="Data">
+            <EntityTypeMapping TypeName="JournalDBModel.Data">
+              <MappingFragment StoreEntitySet="Data">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
+                <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
+                <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
+                <ScalarProperty Name="route" ColumnName="route" />
+                <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver">
+            <EntityTypeMapping TypeName="JournalDBModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="JournalDBModel.Data" Width="1.5" PointX="0.75" PointY="0.75" Height="2.9417936197916665" IsExpanded="true" />
+        <EntityTypeShape EntityType="JournalDBModel.Driver" Width="1.5" PointX="2.75" PointY="0.75" Height="1.4033821614583335" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

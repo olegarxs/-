@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="JournalDBModel.Data">
+        <MappingFragment StoreEntitySet="Data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
+          <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
+          <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
+          <ScalarProperty Name="route" ColumnName="route" />
+          <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver">
+      <EntityTypeMapping TypeName="JournalDBModel.Driver">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
