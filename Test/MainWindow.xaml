@@ -16,11 +16,12 @@
                 <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля"/>
                 <DataGridTextColumn Binding="{Binding route}" Header="Путь" Width="300"/>
                 <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
-                <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия водителя"/>
+                <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия заказчика"/>
                 <DataGridTextColumn Binding="{Binding cargo}" Header="Груз"/>
                 <DataGridTextColumn Binding="{Binding applicationStatus}" Header="Статус заказа"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="50" Click="Button_Click">Добавить запись</Button>
+        <Button Height="50" Click="Button_Click" Grid.ColumnSpan="2" Margin="12,224,203,37">Добавить запись</Button>
+        <Button Name="btnUPDATE" VerticalAlignment="Bottom" Click="btnUPDATE_Click">uPDATE</Button>
     </Grid>
 </Window>

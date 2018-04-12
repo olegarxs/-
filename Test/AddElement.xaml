@@ -10,28 +10,46 @@
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="18">Заполните поля</TextBlock>
         <StackPanel Grid.Row="1">
             <Label Content="Наименование подразделения"/>
-            <TextBox/>
-            <Label Content="Дата и время заявки.Грузовой или легквой автомобиль"/>
-            <TextBox/>
+            <TextBox Name="tbName"/>
+            <Label Content="Тип автомобиля:"/>
+            <ComboBox Name="tbCar" SelectionChanged="tbCar_SelectionChanged">
+                <ComboBoxItem>Грузовая</ComboBoxItem>
+                <ComboBoxItem>Легковая</ComboBoxItem>
+            </ComboBox>
+            
             <Label Content="Дата и время предоставления автомобиля"/>
-            <TextBox/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Дата: "/>
+                <DatePicker Name="dtpick" />
+                <Label Content="Время: "/>
+                <TextBox Name="tbHours" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <TextBlock FontSize="16" FontWeight="Bold" Text=" : "/>
+                <TextBox Name="tbMinuts" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </StackPanel>
             <Label Content="Для каких целей будет использоваться автомобиль"/>
-            <TextBox/>
+            <ComboBox Name="cbPurposesOfUsingAuto">
+                <ComboBoxItem>Доставка груза</ComboBoxItem>
+                <ComboBoxItem>Доставка документов</ComboBoxItem>
+                <ComboBoxItem>Доставка сотрудников</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Примечание по целям использования автомобиля"/>
+            <TextBox Name="tbCargo" />
             <Label Content="Предпологаемый маршрут движения"/>
-            <TextBox/>
-            <TextBlock Padding="5,0,0,0" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
-            <TextBox/>
-            <Label Content="Наименование груза"/>
-            <TextBox/>
+            <TextBox Name="tbRoute"/>
+            
             <Label Content="Фамилия заказчика автомобиля"/>
-            <TextBox/>
-            <Label Content="Статус заказа:"/>
-            <ComboBox>
+            <TextBox Name="tbLastName"/>
+            <StackPanel Name="hide" Visibility="Hidden">
+                <TextBlock Padding="5,0,0,0" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
+                <TextBox Name="tbNameDocument" Margin="0,0,0,10"/>
+            </StackPanel>
+            <!--<Label Content="Статус заказа:"/>
+            <ComboBox Name="cbApplicationStatus">
                 <ComboBoxItem>Не выполнен</ComboBoxItem>
                 <ComboBoxItem>В действии</ComboBoxItem>
                 <ComboBoxItem>Выполнен</ComboBoxItem>
-            </ComboBox>
-            
+            </ComboBox>-->
+            <Button Name="btnAddOrder" Click="btnAddOrder_Click">Добавить заказ</Button>
         </StackPanel>
     </Grid>
 </Window>

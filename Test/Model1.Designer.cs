@@ -24,32 +24,32 @@ namespace Test
     /// <summary>
     /// Нет доступной документации по метаданным.
     /// </summary>
-    public partial class JournalDBEntities : ObjectContext
+    public partial class JournalDBEntities1 : ObjectContext
     {
         #region Конструкторы
     
         /// <summary>
-        /// Инициализирует новый объект JournalDBEntities, используя строку соединения из раздела "JournalDBEntities" файла конфигурации приложения.
+        /// Инициализирует новый объект JournalDBEntities1, используя строку соединения из раздела "JournalDBEntities1" файла конфигурации приложения.
         /// </summary>
-        public JournalDBEntities() : base("name=JournalDBEntities", "JournalDBEntities")
+        public JournalDBEntities1() : base("name=JournalDBEntities1", "JournalDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Инициализация нового объекта JournalDBEntities.
+        /// Инициализация нового объекта JournalDBEntities1.
         /// </summary>
-        public JournalDBEntities(string connectionString) : base(connectionString, "JournalDBEntities")
+        public JournalDBEntities1(string connectionString) : base(connectionString, "JournalDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Инициализация нового объекта JournalDBEntities.
+        /// Инициализация нового объекта JournalDBEntities1.
         /// </summary>
-        public JournalDBEntities(EntityConnection connection) : base(connection, "JournalDBEntities")
+        public JournalDBEntities1(EntityConnection connection) : base(connection, "JournalDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -198,7 +198,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String name
         {
@@ -208,14 +208,11 @@ namespace Test
             }
             set
             {
-                if (_name != value)
-                {
-                    OnnameChanging(value);
-                    ReportPropertyChanging("name");
-                    _name = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("name");
-                    OnnameChanged();
-                }
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
             }
         }
         private global::System.String _name;
@@ -225,7 +222,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String applicationDateAndTime
         {
@@ -235,14 +232,11 @@ namespace Test
             }
             set
             {
-                if (_applicationDateAndTime != value)
-                {
-                    OnapplicationDateAndTimeChanging(value);
-                    ReportPropertyChanging("applicationDateAndTime");
-                    _applicationDateAndTime = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("applicationDateAndTime");
-                    OnapplicationDateAndTimeChanged();
-                }
+                OnapplicationDateAndTimeChanging(value);
+                ReportPropertyChanging("applicationDateAndTime");
+                _applicationDateAndTime = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("applicationDateAndTime");
+                OnapplicationDateAndTimeChanged();
             }
         }
         private global::System.String _applicationDateAndTime;
@@ -252,7 +246,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String dateAndTimeOfCarProvision
         {
@@ -262,14 +256,11 @@ namespace Test
             }
             set
             {
-                if (_dateAndTimeOfCarProvision != value)
-                {
-                    OndateAndTimeOfCarProvisionChanging(value);
-                    ReportPropertyChanging("dateAndTimeOfCarProvision");
-                    _dateAndTimeOfCarProvision = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("dateAndTimeOfCarProvision");
-                    OndateAndTimeOfCarProvisionChanged();
-                }
+                OndateAndTimeOfCarProvisionChanging(value);
+                ReportPropertyChanging("dateAndTimeOfCarProvision");
+                _dateAndTimeOfCarProvision = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("dateAndTimeOfCarProvision");
+                OndateAndTimeOfCarProvisionChanged();
             }
         }
         private global::System.String _dateAndTimeOfCarProvision;
@@ -279,7 +270,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String purposesOfUsingAuto
         {
@@ -289,14 +280,11 @@ namespace Test
             }
             set
             {
-                if (_purposesOfUsingAuto != value)
-                {
-                    OnpurposesOfUsingAutoChanging(value);
-                    ReportPropertyChanging("purposesOfUsingAuto");
-                    _purposesOfUsingAuto = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("purposesOfUsingAuto");
-                    OnpurposesOfUsingAutoChanged();
-                }
+                OnpurposesOfUsingAutoChanging(value);
+                ReportPropertyChanging("purposesOfUsingAuto");
+                _purposesOfUsingAuto = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("purposesOfUsingAuto");
+                OnpurposesOfUsingAutoChanged();
             }
         }
         private global::System.String _purposesOfUsingAuto;
@@ -306,7 +294,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String route
         {
@@ -316,14 +304,11 @@ namespace Test
             }
             set
             {
-                if (_route != value)
-                {
-                    OnrouteChanging(value);
-                    ReportPropertyChanging("route");
-                    _route = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("route");
-                    OnrouteChanged();
-                }
+                OnrouteChanging(value);
+                ReportPropertyChanging("route");
+                _route = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("route");
+                OnrouteChanged();
             }
         }
         private global::System.String _route;
@@ -333,7 +318,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String nameDocument
         {
@@ -343,14 +328,11 @@ namespace Test
             }
             set
             {
-                if (_nameDocument != value)
-                {
-                    OnnameDocumentChanging(value);
-                    ReportPropertyChanging("nameDocument");
-                    _nameDocument = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("nameDocument");
-                    OnnameDocumentChanged();
-                }
+                OnnameDocumentChanging(value);
+                ReportPropertyChanging("nameDocument");
+                _nameDocument = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("nameDocument");
+                OnnameDocumentChanged();
             }
         }
         private global::System.String _nameDocument;
@@ -360,7 +342,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String lastName
         {
@@ -370,14 +352,11 @@ namespace Test
             }
             set
             {
-                if (_lastName != value)
-                {
-                    OnlastNameChanging(value);
-                    ReportPropertyChanging("lastName");
-                    _lastName = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("lastName");
-                    OnlastNameChanged();
-                }
+                OnlastNameChanging(value);
+                ReportPropertyChanging("lastName");
+                _lastName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("lastName");
+                OnlastNameChanged();
             }
         }
         private global::System.String _lastName;
@@ -387,7 +366,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String cargo
         {
@@ -397,14 +376,11 @@ namespace Test
             }
             set
             {
-                if (_cargo != value)
-                {
-                    OncargoChanging(value);
-                    ReportPropertyChanging("cargo");
-                    _cargo = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("cargo");
-                    OncargoChanged();
-                }
+                OncargoChanging(value);
+                ReportPropertyChanging("cargo");
+                _cargo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("cargo");
+                OncargoChanged();
             }
         }
         private global::System.String _cargo;
@@ -414,7 +390,7 @@ namespace Test
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String applicationStatus
         {
@@ -424,14 +400,11 @@ namespace Test
             }
             set
             {
-                if (_applicationStatus != value)
-                {
-                    OnapplicationStatusChanging(value);
-                    ReportPropertyChanging("applicationStatus");
-                    _applicationStatus = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("applicationStatus");
-                    OnapplicationStatusChanged();
-                }
+                OnapplicationStatusChanging(value);
+                ReportPropertyChanging("applicationStatus");
+                _applicationStatus = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("applicationStatus");
+                OnapplicationStatusChanged();
             }
         }
         private global::System.String _applicationStatus;

@@ -22,22 +22,37 @@ namespace Test
     /// </summary>
     public partial class MainWindow : Window
     {
-        JournalDBEntities db;
+
+        JournalDBEntities1 db = new JournalDBEntities1();
+        
 
         public MainWindow()
         {
             InitializeComponent();
+            //this.WindowState = WindowState.Maximized;  // для водителей
+            //this.WindowStyle = System.Windows.WindowStyle.None;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            db = new JournalDBEntities();
             g1.ItemsSource = db.Data.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new AddElement().Show();
+        }
+
+        public void UpdataTable()
+        {
+            g1.ItemsSource = null;
+            g1.ItemsSource = db.Data.ToList();
+        }
+
+        private void btnUPDATE_Click(object sender, RoutedEventArgs e)
+        {
+            g1.ItemsSource = null;
+            g1.ItemsSource = db.Data.ToList();
         }
 
         //private void binddatagrid()

@@ -6,20 +6,7 @@
     <edmx:StorageModels>
       <Schema Namespace="JournalDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="JournalDBModelStoreContainer">
-          <EntitySet Name="Data" EntityType="JournalDBModel.Store.Data" store:Type="Tables" store:Schema="dbo" store:Name="Data">
-            <DefiningQuery>SELECT 
-      [Data].[id] AS [id], 
-      [Data].[name] AS [name], 
-      [Data].[applicationDateAndTime] AS [applicationDateAndTime], 
-      [Data].[dateAndTimeOfCarProvision] AS [dateAndTimeOfCarProvision], 
-      [Data].[purposesOfUsingAuto] AS [purposesOfUsingAuto], 
-      [Data].[route] AS [route], 
-      [Data].[nameDocument] AS [nameDocument], 
-      [Data].[lastName] AS [lastName], 
-      [Data].[cargo] AS [cargo], 
-      [Data].[applicationStatus] AS [applicationStatus]
-      FROM [dbo].[Data] AS [Data]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Data" EntityType="JournalDBModel.Store.Data" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Driver" EntityType="JournalDBModel.Store.Driver" store:Type="Tables" store:Schema="dbo" store:Name="Driver">
             <DefiningQuery>SELECT 
       [Driver].[id_driver] AS [id_driver], 
@@ -27,21 +14,9 @@
       FROM [dbo].[Driver] AS [Driver]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-        <!--Ошибки, обнаруженные при создании:
-      предупреждение 6002: В таблице или представлении "JournalDB.dbo.Data" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
-      -->
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="applicationDateAndTime" />
-            <PropertyRef Name="dateAndTimeOfCarProvision" />
-            <PropertyRef Name="purposesOfUsingAuto" />
-            <PropertyRef Name="route" />
-            <PropertyRef Name="nameDocument" />
-            <PropertyRef Name="lastName" />
-            <PropertyRef Name="cargo" />
-            <PropertyRef Name="applicationStatus" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nchar" Nullable="false" MaxLength="20" />
@@ -70,22 +45,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JournalDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="JournalDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="JournalDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Data" EntityType="JournalDBModel.Data" />
           <EntitySet Name="Driver" EntityType="JournalDBModel.Driver" />
         </EntityContainer>
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="applicationDateAndTime" />
-            <PropertyRef Name="dateAndTimeOfCarProvision" />
-            <PropertyRef Name="purposesOfUsingAuto" />
-            <PropertyRef Name="route" />
-            <PropertyRef Name="nameDocument" />
-            <PropertyRef Name="lastName" />
-            <PropertyRef Name="cargo" />
-            <PropertyRef Name="applicationStatus" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
@@ -111,7 +77,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
+        <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities1">
           <EntitySetMapping Name="Data">
             <EntityTypeMapping TypeName="JournalDBModel.Data">
               <MappingFragment StoreEntitySet="Data">
