@@ -18,7 +18,7 @@
                 <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
                 <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия заказчика"/>
                 <DataGridTextColumn Binding="{Binding cargo}" Header="Груз"/>
-                <DataGridTextColumn Binding="{Binding applicationStatus}" Header="Статус заказа"/>
+                <DataGridTextColumn Binding="{Binding Path=applicationStatus}" Header="Статус заказа"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Height="50" Click="Button_Click" Grid.ColumnSpan="2" Margin="12,224,203,37">Добавить запись</Button>
