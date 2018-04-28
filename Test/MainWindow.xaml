@@ -1,19 +1,22 @@
 ﻿<Window x:Class="Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="MainWindow" Height="493" Width="525" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterOwner" WindowState="Maximized">
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="288*" />
-            <ColumnDefinition Width="215*" />
-        </Grid.ColumnDefinitions>
-        <DataGrid Name="g1" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Name="g1" AutoGenerateColumns="False" Grid.Row="0" SelectionChanged="g1_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding name}" Header="Наименование подразделения"/>
                 <DataGridTextColumn Binding="{Binding applicationDateAndTime}" Header="Дата и время заказа" Width="150"/>
-                <DataGridTextColumn Binding="{Binding dateAndTimeOfCarProvision}" Header="Дата и время предоставления автомобиля"/>
-                <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля"/>
+                <DataGridTextColumn Binding="{Binding dateAndTimeOfCarProvision}" Header="Дата и время предоставления автомобиля" Width="250"/>
+                <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля" Width="200"/>
                 <DataGridTextColumn Binding="{Binding route}" Header="Путь" Width="300"/>
                 <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
                 <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия заказчика"/>
@@ -21,7 +24,52 @@
                 <DataGridTextColumn Binding="{Binding Path=applicationStatus}" Header="Статус заказа"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="50" Click="Button_Click" Grid.ColumnSpan="2" Margin="12,224,203,37">Добавить запись</Button>
+        <StackPanel x:Name="editPanel" Grid.Row="1">
+            <WrapPanel>
+                <TextBlock Text="ID"/>
+                <TextBox x:Name="epID" IsReadOnly="True" Width="20"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Наименование подразделения"/>
+                <TextBox x:Name="epName" IsReadOnly="True" Width="50"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Дата и время заказа"/>
+                <TextBox x:Name="epApplicationDateAndTime" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Дата и время предоставления автомобиля"/>
+                <TextBox x:Name="epDateAndTimeOfCarProvision" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Цель использования автомобиля"/>
+                <TextBox x:Name="epPurposesOfUsingAuto" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Путь"/>
+                <TextBox x:Name="epRoute" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Название документа"/>
+                <TextBox x:Name="epNameDocument" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Фамилия заказчика"/>
+                <TextBox x:Name="epLastName" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Груз"/>
+                <TextBox x:Name="epCargo" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Статус заказа"/>
+                <TextBox x:Name="epApplicationStatus" IsReadOnly="True" Width="100"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+            <Button Name="updatebutton" Click="updatebutton_Click">обновить</Button>
+            <Button Click="Button_Click" Grid.ColumnSpan="2" >Добавить запись</Button>
         <Button Name="btnUPDATE" VerticalAlignment="Bottom" Click="btnUPDATE_Click">uPDATE</Button>
+        </StackPanel>
     </Grid>
 </Window>

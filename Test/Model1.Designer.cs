@@ -166,7 +166,7 @@ namespace Test
 
         #endregion
 
-        #region Свойства-примитивы
+        #region Простые свойства
     
         /// <summary>
         /// Нет доступной документации по метаданным.
@@ -185,7 +185,7 @@ namespace Test
                 {
                     OnidChanging(value);
                     ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
+                    _id = StructuralObject.SetValidValue(value, "id");
                     ReportPropertyChanged("id");
                     OnidChanged();
                 }
@@ -210,7 +210,7 @@ namespace Test
             {
                 OnnameChanging(value);
                 ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
+                _name = StructuralObject.SetValidValue(value, false, "name");
                 ReportPropertyChanged("name");
                 OnnameChanged();
             }
@@ -234,7 +234,7 @@ namespace Test
             {
                 OnapplicationDateAndTimeChanging(value);
                 ReportPropertyChanging("applicationDateAndTime");
-                _applicationDateAndTime = StructuralObject.SetValidValue(value, false);
+                _applicationDateAndTime = StructuralObject.SetValidValue(value, false, "applicationDateAndTime");
                 ReportPropertyChanged("applicationDateAndTime");
                 OnapplicationDateAndTimeChanged();
             }
@@ -258,7 +258,7 @@ namespace Test
             {
                 OndateAndTimeOfCarProvisionChanging(value);
                 ReportPropertyChanging("dateAndTimeOfCarProvision");
-                _dateAndTimeOfCarProvision = StructuralObject.SetValidValue(value, false);
+                _dateAndTimeOfCarProvision = StructuralObject.SetValidValue(value, false, "dateAndTimeOfCarProvision");
                 ReportPropertyChanged("dateAndTimeOfCarProvision");
                 OndateAndTimeOfCarProvisionChanged();
             }
@@ -282,7 +282,7 @@ namespace Test
             {
                 OnpurposesOfUsingAutoChanging(value);
                 ReportPropertyChanging("purposesOfUsingAuto");
-                _purposesOfUsingAuto = StructuralObject.SetValidValue(value, false);
+                _purposesOfUsingAuto = StructuralObject.SetValidValue(value, false, "purposesOfUsingAuto");
                 ReportPropertyChanged("purposesOfUsingAuto");
                 OnpurposesOfUsingAutoChanged();
             }
@@ -306,7 +306,7 @@ namespace Test
             {
                 OnrouteChanging(value);
                 ReportPropertyChanging("route");
-                _route = StructuralObject.SetValidValue(value, false);
+                _route = StructuralObject.SetValidValue(value, false, "route");
                 ReportPropertyChanged("route");
                 OnrouteChanged();
             }
@@ -330,7 +330,7 @@ namespace Test
             {
                 OnnameDocumentChanging(value);
                 ReportPropertyChanging("nameDocument");
-                _nameDocument = StructuralObject.SetValidValue(value, false);
+                _nameDocument = StructuralObject.SetValidValue(value, false, "nameDocument");
                 ReportPropertyChanged("nameDocument");
                 OnnameDocumentChanged();
             }
@@ -354,7 +354,7 @@ namespace Test
             {
                 OnlastNameChanging(value);
                 ReportPropertyChanging("lastName");
-                _lastName = StructuralObject.SetValidValue(value, false);
+                _lastName = StructuralObject.SetValidValue(value, false, "lastName");
                 ReportPropertyChanged("lastName");
                 OnlastNameChanged();
             }
@@ -378,7 +378,7 @@ namespace Test
             {
                 OncargoChanging(value);
                 ReportPropertyChanging("cargo");
-                _cargo = StructuralObject.SetValidValue(value, false);
+                _cargo = StructuralObject.SetValidValue(value, false, "cargo");
                 ReportPropertyChanged("cargo");
                 OncargoChanged();
             }
@@ -402,7 +402,7 @@ namespace Test
             {
                 OnapplicationStatusChanging(value);
                 ReportPropertyChanging("applicationStatus");
-                _applicationStatus = StructuralObject.SetValidValue(value, false);
+                _applicationStatus = StructuralObject.SetValidValue(value, false, "applicationStatus");
                 ReportPropertyChanged("applicationStatus");
                 OnapplicationStatusChanged();
             }
@@ -413,7 +413,6 @@ namespace Test
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -441,7 +440,7 @@ namespace Test
 
         #endregion
 
-        #region Свойства-примитивы
+        #region Простые свойства
     
         /// <summary>
         /// Нет доступной документации по метаданным.
@@ -460,7 +459,7 @@ namespace Test
                 {
                     Onid_driverChanging(value);
                     ReportPropertyChanging("id_driver");
-                    _id_driver = StructuralObject.SetValidValue(value);
+                    _id_driver = StructuralObject.SetValidValue(value, "id_driver");
                     ReportPropertyChanged("id_driver");
                     Onid_driverChanged();
                 }
@@ -487,7 +486,7 @@ namespace Test
                 {
                     OnnameChanging(value);
                     ReportPropertyChanging("name");
-                    _name = StructuralObject.SetValidValue(value, false);
+                    _name = StructuralObject.SetValidValue(value, false, "name");
                     ReportPropertyChanged("name");
                     OnnameChanged();
                 }
@@ -499,10 +498,8 @@ namespace Test
 
         #endregion
 
-    
     }
 
     #endregion
 
-    
 }

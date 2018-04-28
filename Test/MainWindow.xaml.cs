@@ -14,6 +14,9 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.Threading.Tasks;
+using System.Threading;
+using System.ComponentModel;
 
 namespace Test
 {
@@ -24,18 +27,20 @@ namespace Test
     {
 
         JournalDBEntities1 db = new JournalDBEntities1();
-        
 
         public MainWindow()
         {
             InitializeComponent();
+
+            
+           
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            g1.ItemsSource = db.Data.ToList();
+        { 
+                UpdataTable();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,16 +48,44 @@ namespace Test
             new AddElement().Show();
         }
 
-        public void UpdataTable()
+        public async Task UpdataTable()
         {
-            g1.ItemsSource = null;
-            g1.ItemsSource = db.Data.ToList();
+            while (true)
+            {
+                g1.ItemsSource = null;
+                
+                g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
+                
+                await Task.Delay(5000);
+            }
         }
 
         private void btnUPDATE_Click(object sender, RoutedEventArgs e)
         {
             g1.ItemsSource = null;
             g1.ItemsSource = db.Data.ToList();
+        }
+
+        private void updatebutton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void g1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid gd = (DataGrid)sender;
+            Data row = (Data)gd.SelectedItem;
+            epID.Text = row.id.ToString();
+            epName.Text = row.name.ToString();
+            epApplicationDateAndTime.Text = row.applicationDateAndTime.ToString();
+            epDateAndTimeOfCarProvision.Text = row.dateAndTimeOfCarProvision.ToString();
+            epPurposesOfUsingAuto.Text = row.purposesOfUsingAuto.ToString();
+            epRoute.Text = row.route.ToString();
+            epNameDocument.Text = row.route.ToString();
+            epLastName.Text = row.lastName.ToString();
+            epCargo.Text = row.cargo.ToString();
+            epApplicationStatus.Text = row.applicationStatus.ToString();
+            
         }
 
         //private void binddatagrid()
