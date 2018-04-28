@@ -39,8 +39,7 @@ namespace Test
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        { 
-                UpdataTable();
+        {   
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -52,8 +51,6 @@ namespace Test
         {
             while (true)
             {
-                g1.ItemsSource = null;
-                
                 g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
                 
                 await Task.Delay(5000);
@@ -84,8 +81,17 @@ namespace Test
             epNameDocument.Text = row.route.ToString();
             epLastName.Text = row.lastName.ToString();
             epCargo.Text = row.cargo.ToString();
-            epApplicationStatus.Text = row.applicationStatus.ToString();
-            
+            epApplicationStatus.Text = row.applicationStatus.ToString(); 
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            UpdataTable();
+        }
+
+        private void g1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
         //private void binddatagrid()

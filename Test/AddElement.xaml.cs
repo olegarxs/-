@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Text.RegularExpressions;
+
 
 namespace Test
 {
@@ -38,6 +38,7 @@ namespace Test
             d.route = tbRoute.Text;
             d.nameDocument = tbNameDocument.Text;
             d.lastName = tbLastName.Text;
+            d.nameDocument = "Нет";
             d.applicationStatus = "Не выполненно";
             db.Data.AddObject(d);
             db.SaveChanges();
@@ -51,9 +52,11 @@ namespace Test
             if (selectedItem.Content.ToString() == "Грузовая")
             {
                 hide.Visibility = System.Windows.Visibility.Visible;
+                tbNameDocument.Text = "";
             }
             else {
                 hide.Visibility = System.Windows.Visibility.Hidden;
+                tbNameDocument.Text = "Нет";
             }
         }
     
