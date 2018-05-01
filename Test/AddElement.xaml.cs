@@ -24,7 +24,7 @@ namespace Test
             InitializeComponent();
         }
 
-        JournalDBEntities1 db = new JournalDBEntities1();
+        JournalDBEntities db = new JournalDBEntities();
 
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +40,7 @@ namespace Test
             d.lastName = tbLastName.Text;
             d.nameDocument = "Нет";
             d.applicationStatus = "Не выполненно";
-            db.Data.AddObject(d);
+            db.Data.Add(d);
             db.SaveChanges();
             this.Close();
         }

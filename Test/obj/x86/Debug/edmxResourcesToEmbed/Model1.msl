@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities1">
+  <EntityContainerMapping StorageEntityContainer="Хранилище JournalDBModelContainer" CdmEntityContainer="JournalDBEntities">
     <EntitySetMapping Name="Data">
       <EntityTypeMapping TypeName="JournalDBModel.Data">
         <MappingFragment StoreEntitySet="Data">
@@ -13,6 +13,7 @@
           <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
           <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -22,6 +23,7 @@
         <MappingFragment StoreEntitySet="Driver">
           <ScalarProperty Name="id_driver" ColumnName="id_driver" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="status" ColumnName="status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

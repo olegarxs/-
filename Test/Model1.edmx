@@ -4,80 +4,142 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JournalDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="JournalDBModelStoreContainer">
-          <EntitySet Name="Data" EntityType="JournalDBModel.Store.Data" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Driver" EntityType="JournalDBModel.Store.Driver" store:Type="Tables" store:Schema="dbo" store:Name="Driver" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
-            <DefiningQuery>SELECT 
-      [Driver].[id_driver] AS [id_driver], 
-      [Driver].[name] AS [name]
-      FROM [dbo].[Driver] AS [Driver]</DefiningQuery>
-          </EntitySet>
-        </EntityContainer>
+      <Schema Namespace="Хранилище JournalDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="nchar" Nullable="false" MaxLength="20" />
-          <Property Name="applicationDateAndTime" Type="nchar" Nullable="false" MaxLength="100" />
-          <Property Name="dateAndTimeOfCarProvision" Type="nchar" Nullable="false" MaxLength="100" />
-          <Property Name="purposesOfUsingAuto" Type="nchar" Nullable="false" MaxLength="100" />
-          <Property Name="route" Type="nchar" Nullable="false" MaxLength="200" />
-          <Property Name="nameDocument" Type="nchar" Nullable="false" MaxLength="100" />
-          <Property Name="lastName" Type="nchar" Nullable="false" MaxLength="50" />
-          <Property Name="cargo" Type="nchar" Nullable="false" MaxLength="50" />
-          <Property Name="applicationStatus" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="applicationDateAndTime" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="dateAndTimeOfCarProvision" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="purposesOfUsingAuto" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="route" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="nameDocument" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="cargo" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_driver" Type="int" />
+          <Property Name="applicationStatus" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-      предупреждение 6002: В таблице или представлении "JournalDB.dbo.Driver" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
-      -->
         <EntityType Name="Driver">
           <Key>
             <PropertyRef Name="id_driver" />
-            <PropertyRef Name="name" />
           </Key>
-          <Property Name="id_driver" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="id_driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Data_Data">
+          <End Role="Data" Type="Self.Data" Multiplicity="1" />
+          <End Role="Data1" Type="Self.Data" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Data1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Data_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Data" Type="Self.Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="id_driver" />
+            </Principal>
+            <Dependent Role="Data">
+              <PropertyRef Name="id_driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище JournalDBModelContainer">
+          <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Data_Data" Association="Self.FK_Data_Data">
+            <End Role="Data" EntitySet="Data" />
+            <End Role="Data1" EntitySet="Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Data" EntitySet="Data" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="JournalDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="JournalDBEntities1" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-          <EntitySet Name="Data" EntityType="JournalDBModel.Data" />
-          <EntitySet Name="Driver" EntityType="JournalDBModel.Driver" />
-        </EntityContainer>
+      <Schema Namespace="JournalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
-          <Property Name="applicationDateAndTime" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
-          <Property Name="dateAndTimeOfCarProvision" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
-          <Property Name="purposesOfUsingAuto" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
-          <Property Name="route" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="true" />
-          <Property Name="nameDocument" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
-          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
-          <Property Name="cargo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
-          <Property Name="applicationStatus" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="applicationDateAndTime" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="dateAndTimeOfCarProvision" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="route" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cargo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_driver" Type="Int32" />
+          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Data1" Relationship="Self.FK_Data_Data" FromRole="Data" ToRole="Data1" />
+          <NavigationProperty Name="Data2" Relationship="Self.FK_Data_Data" FromRole="Data1" ToRole="Data" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Data_Driver" FromRole="Data" ToRole="Driver" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
             <PropertyRef Name="id_driver" />
-            <PropertyRef Name="name" />
           </Key>
-          <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Self.FK_Data_Driver" FromRole="Driver" ToRole="Data" />
         </EntityType>
+        <Association Name="FK_Data_Data">
+          <End Role="Data" Type="Self.Data" Multiplicity="1" />
+          <End Role="Data1" Type="Self.Data" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Data1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Data_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Data" Type="Self.Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="id_driver" />
+            </Principal>
+            <Dependent Role="Data">
+              <PropertyRef Name="id_driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JournalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Data" EntityType="Self.Data" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" />
+          <AssociationSet Name="FK_Data_Data" Association="Self.FK_Data_Data">
+            <End Role="Data" EntitySet="Data" />
+            <End Role="Data1" EntitySet="Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Data" EntitySet="Data" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище JournalDBModelContainer" CdmEntityContainer="JournalDBEntities">
           <EntitySetMapping Name="Data">
             <EntityTypeMapping TypeName="JournalDBModel.Data">
               <MappingFragment StoreEntitySet="Data">
@@ -90,6 +152,7 @@
                 <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="id_driver" ColumnName="id_driver" />
                 <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -99,6 +162,7 @@
               <MappingFragment StoreEntitySet="Driver">
                 <ScalarProperty Name="id_driver" ColumnName="id_driver" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -116,16 +180,13 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams>
-      <Diagram Name="Model1">
-        <EntityTypeShape EntityType="JournalDBModel.Data" Width="1.5" PointX="0.75" PointY="0.75" Height="2.9417936197916665" IsExpanded="true" />
-        <EntityTypeShape EntityType="JournalDBModel.Driver" Width="1.5" PointX="2.75" PointY="0.75" Height="1.4033821614583335" IsExpanded="true" />
-      </Diagram>
-    </Diagrams>
+    <Diagrams></Diagrams>
   </Designer>
 </edmx:Edmx>

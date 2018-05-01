@@ -26,20 +26,25 @@ namespace Test
     public partial class MainWindow : Window
     {
 
-        JournalDBEntities1 db = new JournalDBEntities1();
+        JournalDBEntities db = new JournalDBEntities();
 
         public MainWindow()
         {
             InitializeComponent();
+            settingForSimplePiople();
+            //vod.SelectedValuePath;
+            //vod.ItemsSource = db.Driver.Select(x => x.name).ToList();
 
-            
-           
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
         }
 
+        public List<Driver> drivers { get; set; }
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {   
+        {
+            drivers = db.Driver.ToList();
+            DataContext = drivers;
+            epDriver.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,16 +54,17 @@ namespace Test
 
         public async Task UpdataTable()
         {
-            while (true)
-            {
-                g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
-                
+            
+                    var dataGrid = db.Data.ToList().AsEnumerable().Reverse();
+                    g1.ItemsSource = dataGrid;
                 await Task.Delay(5000);
-            }
         }
+    
+        
 
         private void btnUPDATE_Click(object sender, RoutedEventArgs e)
         {
+            
             g1.ItemsSource = null;
             g1.ItemsSource = db.Data.ToList();
         }
@@ -78,9 +84,10 @@ namespace Test
             epDateAndTimeOfCarProvision.Text = row.dateAndTimeOfCarProvision.ToString();
             epPurposesOfUsingAuto.Text = row.purposesOfUsingAuto.ToString();
             epRoute.Text = row.route.ToString();
-            epNameDocument.Text = row.route.ToString();
+            epNameDocument.Text = row.nameDocument.ToString();
             epLastName.Text = row.lastName.ToString();
             epCargo.Text = row.cargo.ToString();
+            epDriver.SelectedValue = row.id_driver.Value.ToString();
             epApplicationStatus.Text = row.applicationStatus.ToString(); 
         }
 
@@ -89,23 +96,66 @@ namespace Test
             UpdataTable();
         }
 
-        private void g1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void falseReadEditPanel()
+        {
+            foreach (var item in editPanel.Children)
+            {
+                foreach (var i in ((WrapPanel)item).Children)
+                {
+                    if(i is TextBox) { 
+                        ((TextBox)i).IsReadOnly = true;
+                    }else if(i is ComboBox)
+                    {
+                        ((ComboBox)i).IsEnabled = false;
+                    }
+                }
+            }
+        }
+        private void settingForSimplePiople()
+        {
+            falseReadEditPanel();
+            addButton.Visibility = Visibility.Hidden;
+            acceptOrderButton.Visibility = Visibility.Hidden;
+        }
+
+        //private void vod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ID.Text = ((ComboBox)sender).SelectedValue.ToString();
+        //}
+
+        private void acceptOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            int cell = Convert.ToInt32(epID.Text);
+            var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();
+            cellEdit.name = epName.Text;
+            cellEdit.applicationDateAndTime = epApplicationDateAndTime.Text;
+            cellEdit.dateAndTimeOfCarProvision = epDateAndTimeOfCarProvision.Text;
+            cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
+            cellEdit.route = epRoute.Text;
+            cellEdit.nameDocument = epNameDocument.Text;
+            cellEdit.lastName = epLastName.Text;
+            cellEdit.cargo = epCargo.Text;
+            cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
+            cellEdit.applicationStatus = "Выполняется";
+            db.SaveChanges();
+            g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
+        }
+
+        private void settingForDriver()
+        {
+            falseReadEditPanel();
+            addButton.Visibility = Visibility.Hidden;
+            epDriver.IsEnabled = true;
+        }
+
+        private void settingForChief()
+        {
+            falseReadEditPanel();
+            addButton.Visibility = Visibility.Visible;
+        }
+        private void settingForBoss()
         {
 
         }
-
-        //private void binddatagrid()
-        //{
-        //    SqlConnection con = new SqlConnection();
-        //    con.ConnectionString = ConfigurationManager.ConnectionStrings["connData"].ConnectionString;
-        //    SqlCommand cmd = new SqlCommand();
-        //    cmd.CommandText = "select * from[Data]";
-        //    cmd.Connection = con;
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable("Data");
-        //    da.Fill(dt);
-
-        //    g1.ItemsSource = dt.DefaultView;
-        //}
     }
 }

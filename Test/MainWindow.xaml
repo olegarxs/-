@@ -6,11 +6,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="300"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Name="g1" AutoGenerateColumns="False" Grid.Row="0" SelectionChanged="g1_SelectionChanged" MouseDoubleClick="g1_MouseDoubleClick">
+        <Menu Grid.Row="0" VerticalAlignment="Top">
+            <MenuItem Header="Войти как">
+                <MenuItem Header="Начальник"></MenuItem>
+                <MenuItem Header="Водитель"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <DataGrid Name="g1" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="g1_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding name}" Header="Наименование подразделения"/>
@@ -21,59 +28,64 @@
                 <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
                 <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия заказчика"/>
                 <DataGridTextColumn Binding="{Binding cargo}" Header="Груз"/>
+                <DataGridTextColumn Binding="{Binding Driver.name}" Header="Водитель"/>
                 <DataGridTextColumn Binding="{Binding Path=applicationStatus}" Header="Статус заказа"/>
             </DataGrid.Columns>
         </DataGrid>
-        <GroupBox Grid.Row="1" Header="Описание" Margin="10">
+        <GroupBox Grid.Row="2" Header="Описание" Margin="10">
             <StackPanel x:Name="editPanel">
                 <WrapPanel>
-                <TextBlock Text="ID"/>
-                <TextBox x:Name="epID" IsReadOnly="True" Width="20"/>
+                <TextBlock Text="ID" Name="ID"/>
+                <TextBox x:Name="epID" Width="20"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Наименование подразделения"/>
-                <TextBox x:Name="epName" IsReadOnly="True" Width="50"/>
+                <TextBox x:Name="epName" Width="50"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Дата и время заказа"/>
-                <TextBox x:Name="epApplicationDateAndTime" IsReadOnly="True" Width="150"/>
+                <TextBox x:Name="epApplicationDateAndTime" Width="150"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Дата и время предоставления автомобиля"/>
-                <TextBox x:Name="epDateAndTimeOfCarProvision" IsReadOnly="True" Width="100"/>
+                <TextBox x:Name="epDateAndTimeOfCarProvision" Width="100"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Цель использования автомобиля:"/>
-                <TextBox x:Name="epPurposesOfUsingAuto" IsReadOnly="True" Width="290"/>
+                <TextBox x:Name="epPurposesOfUsingAuto" Width="290"/>
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
                 <TextBlock Text="Путь:"/>
-                <TextBox x:Name="epRoute" IsReadOnly="True" Width="361" Height="50"
+                <TextBox x:Name="epRoute" Width="361" Height="50"
                          TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Название документа"/>
-                <TextBox x:Name="epNameDocument" IsReadOnly="True" Width="100"/>
+                <TextBox x:Name="epNameDocument" Width="100"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Фамилия заказчика"/>
-                <TextBox x:Name="epLastName" IsReadOnly="True" Width="100"/>
+                <TextBox x:Name="epLastName" Width="100"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Груз"/>
-                <TextBox x:Name="epCargo" IsReadOnly="True" Width="100"/>
+                <TextBox x:Name="epCargo" Width="100"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Статус заказа"/>
-                <TextBox x:Name="epApplicationStatus" IsReadOnly="True" Width="100"/>
+                <TextBox x:Name="epApplicationStatus" Width="100"/>
             </WrapPanel>
-            
+                <WrapPanel>
+                    <TextBlock Text="Водитель:"/> 
+                    <ComboBox x:Name="epDriver" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id_driver" >
+                        
+                    </ComboBox>
+                </WrapPanel>
         </StackPanel>
         </GroupBox>
-        <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-            <Button Name="updatebutton" Click="updatebutton_Click">обновить</Button>
-            <Button Click="Button_Click" Grid.ColumnSpan="2" >Добавить запись</Button>
-        <Button Name="btnUPDATE" VerticalAlignment="Bottom" Click="btnUPDATE_Click">uPDATE</Button>
+        <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+            <Button x:Name="acceptOrderButton" Click="acceptOrderButton_Click">Принять заказ</Button>
+            <Button x:Name="addButton" Click="Button_Click">Добавить запись</Button>
         </StackPanel>
     </Grid>
 </Window>
