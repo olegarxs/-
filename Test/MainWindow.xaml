@@ -26,7 +26,7 @@
                 <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля" Width="200"/>
                 <DataGridTextColumn Binding="{Binding route}" Header="Путь" Width="300"/>
                 <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
-                <DataGridTextColumn Binding="{Binding lastName}" Header="Фамилия заказчика"/>
+                <DataGridTextColumn Binding="{Binding Employees.fullName}" Header="Фамилия заказчика"/>
                 <DataGridTextColumn Binding="{Binding cargo}" Header="Груз"/>
                 <DataGridTextColumn Binding="{Binding Driver.name}" Header="Водитель"/>
                 <DataGridTextColumn Binding="{Binding Path=applicationStatus}" Header="Статус заказа"/>
@@ -84,6 +84,7 @@
         </StackPanel>
         </GroupBox>
         <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+            <Button x:Name="editButton" Click="editButton_Click">Изменить</Button>
             <Button x:Name="acceptOrderButton" Click="acceptOrderButton_Click">Принять заказ</Button>
             <Button x:Name="addButton" Click="Button_Click">Добавить запись</Button>
         </StackPanel>

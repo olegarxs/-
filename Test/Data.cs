@@ -21,13 +21,12 @@ namespace Test
         public string purposesOfUsingAuto { get; set; }
         public string route { get; set; }
         public string nameDocument { get; set; }
-        public string lastName { get; set; }
+        public int id_employe { get; set; }
         public string cargo { get; set; }
         public Nullable<int> id_driver { get; set; }
         public string applicationStatus { get; set; }
     
-        public virtual Data Data1 { get; set; }
-        public virtual Data Data2 { get; set; }
         public virtual Driver Driver { get; set; }
+        public virtual Employees Employees { get; set; }
     }
 }

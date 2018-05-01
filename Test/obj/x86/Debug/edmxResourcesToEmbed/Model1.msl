@@ -11,7 +11,7 @@
           <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
           <ScalarProperty Name="route" ColumnName="route" />
           <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
-          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="id_employe" ColumnName="id_employe" />
           <ScalarProperty Name="cargo" ColumnName="cargo" />
           <ScalarProperty Name="id_driver" ColumnName="id_driver" />
           <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
@@ -23,7 +23,18 @@
         <MappingFragment StoreEntitySet="Driver">
           <ScalarProperty Name="id_driver" ColumnName="id_driver" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
           <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="JournalDBModel.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="accessRights" ColumnName="accessRights" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

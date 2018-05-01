@@ -55,8 +55,8 @@ namespace Test
         public async Task UpdataTable()
         {
             
-                    var dataGrid = db.Data.ToList().AsEnumerable().Reverse();
-                    g1.ItemsSource = dataGrid;
+                var dataGrid = db.Data.ToList().AsEnumerable().Reverse();
+                g1.ItemsSource = dataGrid;
                 await Task.Delay(5000);
         }
     
@@ -85,7 +85,7 @@ namespace Test
             epPurposesOfUsingAuto.Text = row.purposesOfUsingAuto.ToString();
             epRoute.Text = row.route.ToString();
             epNameDocument.Text = row.nameDocument.ToString();
-            epLastName.Text = row.lastName.ToString();
+            epLastName.Text = row.Employees.fullName.ToString() ;
             epCargo.Text = row.cargo.ToString();
             epDriver.SelectedValue = row.id_driver.Value.ToString();
             epApplicationStatus.Text = row.applicationStatus.ToString(); 
@@ -133,7 +133,7 @@ namespace Test
             cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
             cellEdit.route = epRoute.Text;
             cellEdit.nameDocument = epNameDocument.Text;
-            cellEdit.lastName = epLastName.Text;
+            cellEdit.id_employe = int.Parse(epLastName.Text);
             cellEdit.cargo = epCargo.Text;
             cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
             cellEdit.applicationStatus = "Выполняется";
@@ -156,6 +156,24 @@ namespace Test
         private void settingForBoss()
         {
 
+        }
+
+        private void editButton_Click(object sender, RoutedEventArgs e)
+        {
+            int cell = Convert.ToInt32(epID.Text);
+            var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();
+            cellEdit.name = epName.Text;
+            cellEdit.applicationDateAndTime = epApplicationDateAndTime.Text;
+            cellEdit.dateAndTimeOfCarProvision = epDateAndTimeOfCarProvision.Text;
+            cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
+            cellEdit.route = epRoute.Text;
+            cellEdit.nameDocument = epNameDocument.Text;
+            cellEdit.id_employe = int.Parse(epLastName.Text);
+            cellEdit.cargo = epCargo.Text;
+            cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
+            cellEdit.applicationStatus = epApplicationStatus.Text;
+            db.SaveChanges();
+            g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
         }
     }
 }

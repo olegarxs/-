@@ -16,7 +16,7 @@
           <Property Name="purposesOfUsingAuto" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="route" Type="nchar" MaxLength="200" Nullable="false" />
           <Property Name="nameDocument" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="lastName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_employe" Type="int" Nullable="false" />
           <Property Name="cargo" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="id_driver" Type="int" />
           <Property Name="applicationStatus" Type="nchar" MaxLength="20" Nullable="false" />
@@ -27,20 +27,18 @@
           </Key>
           <Property Name="id_driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="mobilePhone" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Data_Data">
-          <End Role="Data" Type="Self.Data" Multiplicity="1" />
-          <End Role="Data1" Type="Self.Data" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Data1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="accessRights" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Data_Driver">
           <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
           <End Role="Data" Type="Self.Data" Multiplicity="*" />
@@ -53,15 +51,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Data_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Data" Type="Self.Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Data">
+              <PropertyRef Name="id_employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище JournalDBModelContainer">
           <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Data_Data" Association="Self.FK_Data_Data">
-            <End Role="Data" EntitySet="Data" />
-            <End Role="Data1" EntitySet="Data" />
-          </AssociationSet>
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
             <End Role="Driver" EntitySet="Driver" />
+            <End Role="Data" EntitySet="Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Data_Employees" Association="Self.FK_Data_Employees">
+            <End Role="Employees" EntitySet="Employees" />
             <End Role="Data" EntitySet="Data" />
           </AssociationSet>
         </EntityContainer>
@@ -81,13 +92,12 @@
           <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="route" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_employe" Type="Int32" Nullable="false" />
           <Property Name="cargo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="id_driver" Type="Int32" />
           <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Data1" Relationship="Self.FK_Data_Data" FromRole="Data" ToRole="Data1" />
-          <NavigationProperty Name="Data2" Relationship="Self.FK_Data_Data" FromRole="Data1" ToRole="Data" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Data_Driver" FromRole="Data" ToRole="Driver" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Data_Employees" FromRole="Data" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
@@ -95,21 +105,20 @@
           </Key>
           <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="mobilePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Self.FK_Data_Driver" FromRole="Driver" ToRole="Data" />
         </EntityType>
-        <Association Name="FK_Data_Data">
-          <End Role="Data" Type="Self.Data" Multiplicity="1" />
-          <End Role="Data1" Type="Self.Data" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Data1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="accessRights" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
+        </EntityType>
         <Association Name="FK_Data_Driver">
           <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
           <End Role="Data" Type="Self.Data" Multiplicity="*" />
@@ -122,15 +131,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Data_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Data" Type="Self.Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Data">
+              <PropertyRef Name="id_employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="JournalDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Data" EntityType="Self.Data" />
           <EntitySet Name="Driver" EntityType="Self.Driver" />
-          <AssociationSet Name="FK_Data_Data" Association="Self.FK_Data_Data">
-            <End Role="Data" EntitySet="Data" />
-            <End Role="Data1" EntitySet="Data" />
-          </AssociationSet>
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
           <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
             <End Role="Driver" EntitySet="Driver" />
+            <End Role="Data" EntitySet="Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Data_Employees" Association="Self.FK_Data_Employees">
+            <End Role="Employees" EntitySet="Employees" />
             <End Role="Data" EntitySet="Data" />
           </AssociationSet>
         </EntityContainer>
@@ -150,7 +172,7 @@
                 <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
                 <ScalarProperty Name="route" ColumnName="route" />
                 <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="id_employe" ColumnName="id_employe" />
                 <ScalarProperty Name="cargo" ColumnName="cargo" />
                 <ScalarProperty Name="id_driver" ColumnName="id_driver" />
                 <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
@@ -162,7 +184,18 @@
               <MappingFragment StoreEntitySet="Driver">
                 <ScalarProperty Name="id_driver" ColumnName="id_driver" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
                 <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="JournalDBModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="accessRights" ColumnName="accessRights" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

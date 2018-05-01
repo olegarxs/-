@@ -27,5 +27,6 @@ namespace Test
     
         public DbSet<Data> Data { get; set; }
         public DbSet<Driver> Driver { get; set; }
+        public DbSet<Employees> Employees { get; set; }
     }
 }

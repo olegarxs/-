@@ -12,17 +12,17 @@ namespace Test
     using System;
     using System.Collections.Generic;
     
-    public partial class Driver
+    public partial class Employees
     {
-        public Driver()
+        public Employees()
         {
             this.Data = new HashSet<Data>();
         }
     
-        public int id_driver { get; set; }
-        public string name { get; set; }
-        public string mobilePhone { get; set; }
-        public bool status { get; set; }
+        public int id { get; set; }
+        public string fullName { get; set; }
+        public string password { get; set; }
+        public bool accessRights { get; set; }
     
         public virtual ICollection<Data> Data { get; set; }
     }

@@ -11,13 +11,12 @@
     <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="route" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="id_employe" Type="Int32" Nullable="false" />
     <Property Name="cargo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="id_driver" Type="Int32" />
     <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Data1" Relationship="Self.FK_Data_Data" FromRole="Data" ToRole="Data1" />
-    <NavigationProperty Name="Data2" Relationship="Self.FK_Data_Data" FromRole="Data1" ToRole="Data" />
     <NavigationProperty Name="Driver" Relationship="Self.FK_Data_Driver" FromRole="Data" ToRole="Driver" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Data_Employees" FromRole="Data" ToRole="Employees" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
@@ -25,21 +24,20 @@
     </Key>
     <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="mobilePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="status" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Data" Relationship="Self.FK_Data_Driver" FromRole="Driver" ToRole="Data" />
   </EntityType>
-  <Association Name="FK_Data_Data">
-    <End Role="Data" Type="Self.Data" Multiplicity="1" />
-    <End Role="Data1" Type="Self.Data" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Data">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Data1">
-        <PropertyRef Name="id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fullName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="accessRights" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
+  </EntityType>
   <Association Name="FK_Data_Driver">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
     <End Role="Data" Type="Self.Data" Multiplicity="*" />
@@ -52,15 +50,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Data_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Data" Type="Self.Data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Data">
+        <PropertyRef Name="id_employe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="JournalDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Data" EntityType="Self.Data" />
     <EntitySet Name="Driver" EntityType="Self.Driver" />
-    <AssociationSet Name="FK_Data_Data" Association="Self.FK_Data_Data">
-      <End Role="Data" EntitySet="Data" />
-      <End Role="Data1" EntitySet="Data" />
-    </AssociationSet>
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
     <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
       <End Role="Driver" EntitySet="Driver" />
+      <End Role="Data" EntitySet="Data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Data_Employees" Association="Self.FK_Data_Employees">
+      <End Role="Employees" EntitySet="Employees" />
       <End Role="Data" EntitySet="Data" />
     </AssociationSet>
   </EntityContainer>

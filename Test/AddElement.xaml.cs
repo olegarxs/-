@@ -37,7 +37,7 @@ namespace Test
             d.cargo = tbCargo.Text;
             d.route = tbRoute.Text;
             d.nameDocument = tbNameDocument.Text;
-            d.lastName = tbLastName.Text;
+            d.id_employe = int.Parse(tbLastName.Text);
             d.nameDocument = "Нет";
             d.applicationStatus = "Не выполненно";
             db.Data.Add(d);
