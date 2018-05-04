@@ -23,6 +23,7 @@ namespace Test
         public string fullName { get; set; }
         public string password { get; set; }
         public bool accessRights { get; set; }
+        public string login { get; set; }
     
         public virtual ICollection<Data> Data { get; set; }
     }

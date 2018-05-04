@@ -31,7 +31,7 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            settingForSimplePiople();
+
             //vod.SelectedValuePath;
             //vod.ItemsSource = db.Driver.Select(x => x.name).ToList();
 
@@ -174,6 +174,11 @@ namespace Test
             cellEdit.applicationStatus = epApplicationStatus.Text;
             db.SaveChanges();
             g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
+        }
+
+        private void btBoss_Click(object sender, RoutedEventArgs e)
+        {
+            new Entrance().Show();
         }
     }
 }

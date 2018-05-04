@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище JournalDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JournalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="id" />
@@ -35,6 +35,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="fullName" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="password" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="accessRights" Type="bit" Nullable="false" />
@@ -63,7 +64,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище JournalDBModelContainer">
+        <EntityContainer Name="JournalDBModelStoreContainer">
           <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -76,8 +77,7 @@
             <End Role="Data" EntitySet="Data" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JournalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -118,6 +118,7 @@
           <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="accessRights" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_Data_Driver">
           <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
@@ -160,48 +161,48 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище JournalDBModelContainer" CdmEntityContainer="JournalDBEntities">
-          <EntitySetMapping Name="Data">
-            <EntityTypeMapping TypeName="JournalDBModel.Data">
-              <MappingFragment StoreEntitySet="Data">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Data)">
+        <MappingFragment StoreEntitySet="Data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
+          <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
+          <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
+          <ScalarProperty Name="route" ColumnName="route" />
+          <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
+          <ScalarProperty Name="id_employe" ColumnName="id_employe" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+          <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Driver)">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Employees)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
-                <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
-                <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
-                <ScalarProperty Name="route" ColumnName="route" />
-                <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
-                <ScalarProperty Name="id_employe" ColumnName="id_employe" />
-                <ScalarProperty Name="cargo" ColumnName="cargo" />
-                <ScalarProperty Name="id_driver" ColumnName="id_driver" />
-                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Driver">
-            <EntityTypeMapping TypeName="JournalDBModel.Driver">
-              <MappingFragment StoreEntitySet="Driver">
-                <ScalarProperty Name="id_driver" ColumnName="id_driver" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="JournalDBModel.Employees">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="fullName" ColumnName="fullName" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="accessRights" ColumnName="accessRights" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="accessRights" ColumnName="accessRights" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -215,7 +216,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>

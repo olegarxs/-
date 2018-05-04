@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище JournalDBModelContainer" CdmEntityContainer="JournalDBEntities">
+  <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
     <EntitySetMapping Name="Data">
-      <EntityTypeMapping TypeName="JournalDBModel.Data">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Data)">
         <MappingFragment StoreEntitySet="Data">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -19,7 +19,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Driver">
-      <EntityTypeMapping TypeName="JournalDBModel.Driver">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Driver)">
         <MappingFragment StoreEntitySet="Driver">
           <ScalarProperty Name="id_driver" ColumnName="id_driver" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -29,8 +29,9 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="JournalDBModel.Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Employees)">
         <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fullName" ColumnName="fullName" />
           <ScalarProperty Name="password" ColumnName="password" />

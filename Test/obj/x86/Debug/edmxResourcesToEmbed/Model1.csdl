@@ -37,6 +37,7 @@
     <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="accessRights" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
+    <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
   </EntityType>
   <Association Name="FK_Data_Driver">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />

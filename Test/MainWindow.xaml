@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top">
             <MenuItem Header="Войти как">
-                <MenuItem Header="Начальник"></MenuItem>
+                <MenuItem Header="Начальник" x:Name="btBoss" Click="btBoss_Click"></MenuItem>
                 <MenuItem Header="Водитель"></MenuItem>
             </MenuItem>
         </Menu>
