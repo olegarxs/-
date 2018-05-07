@@ -84,6 +84,11 @@
         </StackPanel>
         </GroupBox>
         <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+            <ComboBox>
+                <ComboBoxItem Selected="ComboBoxItem_Selected">водитель</ComboBoxItem>
+                <ComboBoxItem Selected="ComboBoxItem_Selected_1">начальник</ComboBoxItem>
+                <ComboBoxItem Selected="ComboBoxItem_Selected_2">босс</ComboBoxItem>
+            </ComboBox>
             <Button x:Name="editButton" Click="editButton_Click">Изменить</Button>
             <Button x:Name="acceptOrderButton" Click="acceptOrderButton_Click">Принять заказ</Button>
             <Button x:Name="addButton" Click="Button_Click">Добавить запись</Button>

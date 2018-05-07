@@ -31,9 +31,9 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
+            settingForSimplePiople();
 
-            //vod.SelectedValuePath;
-            //vod.ItemsSource = db.Driver.Select(x => x.name).ToList();
+
 
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
@@ -64,14 +64,8 @@ namespace Test
 
         private void btnUPDATE_Click(object sender, RoutedEventArgs e)
         {
-            
             g1.ItemsSource = null;
             g1.ItemsSource = db.Data.ToList();
-        }
-
-        private void updatebutton_Click(object sender, RoutedEventArgs e)
-        {
-           
         }
 
         private void g1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -96,32 +90,25 @@ namespace Test
             UpdataTable();
         }
 
-        private void falseReadEditPanel()
+        private void ReadEditPanel(bool boolVar)
         {
             foreach (var item in editPanel.Children)
             {
                 foreach (var i in ((WrapPanel)item).Children)
                 {
                     if(i is TextBox) { 
-                        ((TextBox)i).IsReadOnly = true;
+                        (i as TextBox).IsReadOnly = boolVar;
                     }else if(i is ComboBox)
                     {
-                        ((ComboBox)i).IsEnabled = false;
+                        (i as ComboBox).IsEnabled = !boolVar;
                     }
                 }
             }
         }
         private void settingForSimplePiople()
         {
-            falseReadEditPanel();
-            addButton.Visibility = Visibility.Hidden;
-            acceptOrderButton.Visibility = Visibility.Hidden;
+            setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Hidden, false);
         }
-
-        //private void vod_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ID.Text = ((ComboBox)sender).SelectedValue.ToString();
-        //}
 
         private void acceptOrderButton_Click(object sender, RoutedEventArgs e)
         {
@@ -143,19 +130,27 @@ namespace Test
 
         private void settingForDriver()
         {
-            falseReadEditPanel();
-            addButton.Visibility = Visibility.Hidden;
-            epDriver.IsEnabled = true;
+            setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Visible, true);
         }
 
         private void settingForChief()
         {
-            falseReadEditPanel();
-            addButton.Visibility = Visibility.Visible;
+            setting(true,Visibility.Visible,Visibility.Hidden, Visibility.Hidden,false);
         }
+
+        private void setting(bool onlyReadEditPanel,Visibility visibilityAddButton,
+            Visibility visibilityEditButton, Visibility visibilityAcceptOrderButton, bool onlyReadCbDriver)
+        {
+            ReadEditPanel(onlyReadEditPanel);
+            addButton.Visibility = visibilityAddButton;
+            editButton.Visibility = visibilityEditButton;
+            acceptOrderButton.Visibility = visibilityAcceptOrderButton;
+            epDriver.IsEnabled = onlyReadCbDriver;
+        }
+
         private void settingForBoss()
         {
-
+            setting(false, Visibility.Visible, Visibility.Visible, Visibility.Hidden, false);
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
@@ -179,6 +174,21 @@ namespace Test
         private void btBoss_Click(object sender, RoutedEventArgs e)
         {
             new Entrance().Show();
+        }
+
+        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            settingForDriver();
+        }
+
+        private void ComboBoxItem_Selected_1(object sender, RoutedEventArgs e)
+        {
+            settingForChief();
+        }
+
+        private void ComboBoxItem_Selected_2(object sender, RoutedEventArgs e)
+        {
+            settingForBoss();
         }
     }
 }

@@ -29,28 +29,28 @@ namespace Test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Employees em = new Employees();
+            JournalDBEntities db = new JournalDBEntities();
+            List<Employees> em = db.Employees.ToList();
+            bool check = false;
 
-            for (int i = 0; i < em// кол-во элементов; i++)
+            for (int i = 0; i <  db.Employees.Count(); i++)
             {
-                if (tbLogin.Text == em.login[i].ToString())
+                string login = em.Select(s => s.login).ElementAt(i).ToString();
+                if (tbLogin.Text == login)
                 {
-                    if (tbPass.Text == em.password[i].ToString())
+                    if (tbPass.Text == em.Select(s => s.password).ElementAt(i).ToString())
                     {
-                        id_employe = em.id;
-                        rights = em.accessRights;
+                        id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
+                        rights = bool.Parse(em.Select(s => s.accessRights).ElementAt(i).ToString());
                         MessageBox.Show("Логин и пароль верный");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неверный пароль");
-                    }
+                        check = true;
+                        break;
+                    }                                                           
                 }
-                else
-                {
-                    MessageBox.Show("Не верный логин");
-                }
-
+            }
+            if(check == false)
+            {
+                MessageBox.Show("Вы ввели неверный логин или пароль");
             }
         }
     }
