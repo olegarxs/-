@@ -33,10 +33,18 @@ namespace Test
             InitializeComponent();
             settingForSimplePiople();
 
+            ID.Text = Properties.Settings.Default.rights.ToString();
+            Properties.Settings.Default.rights = 12;
+            Properties.Settings.Default.Save();
 
 
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
+        }
+
+        private void checkProperty()
+        {
+
         }
 
         public List<Driver> drivers { get; set; }

@@ -12,7 +12,6 @@ D:\BSUIR\Test\Test\obj\x86\Debug\Test.exe
 D:\BSUIR\Test\Test\obj\x86\Debug\Test.pdb
 D:\BSUIR\Test\Test\obj\x86\Debug\AddElement.baml
 D:\BSUIR\Test\Test\obj\x86\Debug\AddElement.g.cs
-D:\BSUIR\Test\Test\obj\x86\Debug\Test.csprojResolveAssemblyReference.cache
 D:\BSUIR\Test\Test\obj\x86\Debug\Test.csproj.CoreCompileInputs.cache
 C:\Users\Oleg\Desktop\fsd\Belhudojpromblslabl\Test\bin\Debug\Test.exe.config
 C:\Users\Oleg\Desktop\fsd\Belhudojpromblslabl\Test\bin\Debug\Test.exe
@@ -43,3 +42,4 @@ D:\BSUIR\Test\Test\obj\x86\Debug\Test.csproj.CopyComplete
 D:\BSUIR\Test\Test\obj\x86\Debug\Entrance.g.cs
 D:\BSUIR\Test\Test\obj\x86\Debug\Test_MarkupCompile.lref
 D:\BSUIR\Test\Test\obj\x86\Debug\Entrance.baml
+D:\BSUIR\Test\Test\obj\x86\Debug\Test.csprojAssemblyReference.cache
