@@ -31,11 +31,11 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            settingForSimplePiople();
+            checkProperty();
 
-            ID.Text = Properties.Settings.Default.rights.ToString();
-            Properties.Settings.Default.rights = 12;
-            Properties.Settings.Default.Save();
+            //ID.Text = Properties.Settings.Default.rights.ToString();
+            //Properties.Settings.Default.rights = 12;
+            //Properties.Settings.Default.Save(); // для сохранение данных
 
 
             //this.WindowState = WindowState.Maximized;  // для водителей
@@ -44,7 +44,32 @@ namespace Test
 
         private void checkProperty()
         {
+            
+            
+            ID.Text = Properties.Settings.Default.rights.ToString();
+            switch (Properties.Settings.Default.rights)
+            {
+                case (byte)Rights.People:
+                    settingForSimplePeople();
+                    break;
+                case (byte)Rights.Driver:
+                    settingForDriver();
+                    break;
+                case (byte)Rights.Chief:
+                    settingForChief();
+                    break;
+                case (byte)Rights.Boss:
+                    settingForBoss();
+                    break;
+            }
+        }
 
+        enum Rights
+        {
+            People,
+            Driver,
+            Chief,
+            Boss
         }
 
         public List<Driver> drivers { get; set; }
@@ -62,13 +87,10 @@ namespace Test
 
         public async Task UpdataTable()
         {
-            
-                var dataGrid = db.Data.ToList().AsEnumerable().Reverse();
+                var dataGrid = db.Data.ToList().AsEnumerable().Reverse().Take(5);
                 g1.ItemsSource = dataGrid;
                 await Task.Delay(5000);
         }
-    
-        
 
         private void btnUPDATE_Click(object sender, RoutedEventArgs e)
         {
@@ -89,7 +111,7 @@ namespace Test
             epNameDocument.Text = row.nameDocument.ToString();
             epLastName.Text = row.Employees.fullName.ToString() ;
             epCargo.Text = row.cargo.ToString();
-            epDriver.SelectedValue = row.id_driver.Value.ToString();
+            epDriver.SelectedValue =(row.id_driver is null) ? "0" : row.id_driver.Value.ToString();
             epApplicationStatus.Text = row.applicationStatus.ToString(); 
         }
 
@@ -113,7 +135,7 @@ namespace Test
                 }
             }
         }
-        private void settingForSimplePiople()
+        private void settingForSimplePeople()
         {
             setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Hidden, false);
         }
@@ -158,7 +180,7 @@ namespace Test
 
         private void settingForBoss()
         {
-            setting(false, Visibility.Visible, Visibility.Visible, Visibility.Hidden, false);
+            setting(false, Visibility.Visible, Visibility.Visible, Visibility.Hidden, true);
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)

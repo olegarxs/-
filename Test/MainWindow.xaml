@@ -8,7 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top">
@@ -17,22 +17,43 @@
                 <MenuItem Header="Водитель"></MenuItem>
             </MenuItem>
         </Menu>
-        <DataGrid Name="g1" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="g1_SelectionChanged">
+        <DataGrid Name="g1" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" SelectionChanged="g1_SelectionChanged">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding name}" Header="Наименование подразделения"/>
-                <DataGridTextColumn Binding="{Binding applicationDateAndTime}" Header="Дата и время заказа" Width="150"/>
-                <DataGridTextColumn Binding="{Binding dateAndTimeOfCarProvision}" Header="Дата и время предоставления автомобиля" Width="250"/>
-                <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля" Width="200"/>
-                <DataGridTextColumn Binding="{Binding route}" Header="Путь" Width="300"/>
-                <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа"/>
+                <DataGridTextColumn Binding="{Binding applicationDateAndTime}" Header="Дата и время заказа" Width="150">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding dateAndTimeOfCarProvision}" Header="Дата и время предоставления автомобиля" Width="170">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding purposesOfUsingAuto}" Header="Цель использования автомобиля" Width="135"/>
+                <DataGridTextColumn Binding="{Binding route}" Header="Путь" Width="150" />
+                <DataGridTextColumn Binding="{Binding nameDocument}" Header="Название документа" Width="100"/>
                 <DataGridTextColumn Binding="{Binding Employees.fullName}" Header="Фамилия заказчика"/>
-                <DataGridTextColumn Binding="{Binding cargo}" Header="Груз"/>
-                <DataGridTextColumn Binding="{Binding Driver.name}" Header="Водитель"/>
+                <DataGridTextColumn Binding="{Binding cargo}" Header="Груз" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Driver.name}" Header="Водитель" Width="100"/>
                 <DataGridTextColumn Binding="{Binding Path=applicationStatus}" Header="Статус заказа"/>
+
             </DataGrid.Columns>
         </DataGrid>
-        <GroupBox Grid.Row="2" Header="Описание" Margin="10">
+        <GroupBox Grid.Row="2" Header="Описание" FontSize="14" Margin="10" Padding="10">
             <StackPanel x:Name="editPanel">
                 <WrapPanel>
                 <TextBlock Text="ID" Name="ID"/>
@@ -76,10 +97,8 @@
                 <TextBox x:Name="epApplicationStatus" Width="100"/>
             </WrapPanel>
                 <WrapPanel>
-                    <TextBlock Text="Водитель:"/> 
-                    <ComboBox x:Name="epDriver" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id_driver" >
-                        
-                    </ComboBox>
+                    <TextBlock Text="Водитель:"/>
+                    <ComboBox x:Name="epDriver" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id_driver" />
                 </WrapPanel>
         </StackPanel>
         </GroupBox>

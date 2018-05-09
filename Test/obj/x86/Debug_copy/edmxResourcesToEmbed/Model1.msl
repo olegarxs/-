@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JournalDBModelStoreContainer" CdmEntityContainer="JournalDBEntities">
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Data)">
+        <MappingFragment StoreEntitySet="Data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
+          <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
+          <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
+          <ScalarProperty Name="route" ColumnName="route" />
+          <ScalarProperty Name="nameDocument" ColumnName="nameDocument" />
+          <ScalarProperty Name="id_employe" ColumnName="id_employe" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+          <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Driver)">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="id_driver" ColumnName="id_driver" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Employees)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="accessRights" ColumnName="accessRights" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

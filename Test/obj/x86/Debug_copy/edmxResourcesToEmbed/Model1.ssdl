@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JournalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Data">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="applicationDateAndTime" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="dateAndTimeOfCarProvision" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="purposesOfUsingAuto" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="route" Type="nchar" MaxLength="200" Nullable="false" />
+    <Property Name="nameDocument" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_employe" Type="int" Nullable="false" />
+    <Property Name="cargo" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_driver" Type="int" />
+    <Property Name="applicationStatus" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="id_driver" />
+    </Key>
+    <Property Name="id_driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="mobilePhone" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="fullName" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="accessRights" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Data_Driver">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+    <End Role="Data" Type="Self.Data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="id_driver" />
+      </Principal>
+      <Dependent Role="Data">
+        <PropertyRef Name="id_driver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Data_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Data" Type="Self.Data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Data">
+        <PropertyRef Name="id_employe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JournalDBModelStoreContainer">
+    <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Data_Driver" Association="Self.FK_Data_Driver">
+      <End Role="Driver" EntitySet="Driver" />
+      <End Role="Data" EntitySet="Data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Data_Employees" Association="Self.FK_Data_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Data" EntitySet="Data" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
