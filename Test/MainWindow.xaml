@@ -11,13 +11,14 @@
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Menu Grid.Row="0" VerticalAlignment="Top">
             <MenuItem Header="Войти как">
                 <MenuItem Header="Начальник" x:Name="btBoss" Click="btBoss_Click"></MenuItem>
                 <MenuItem Header="Водитель"></MenuItem>
             </MenuItem>
         </Menu>
-        <DataGrid Name="g1" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" SelectionChanged="g1_SelectionChanged">
+        <DataGrid Name="g1" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="1" SelectionChanged="g1_SelectionChanged">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
@@ -37,7 +38,6 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -53,7 +53,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <GroupBox Grid.Row="2" Header="Описание" FontSize="14" Margin="10" Padding="10">
+        <GroupBox Grid.Row="2" Header="Описание" FontSize="16" Margin="10" Padding="10">
             <StackPanel x:Name="editPanel">
                 <WrapPanel>
                 <TextBlock Text="ID" Name="ID"/>
@@ -94,7 +94,7 @@
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Статус заказа"/>
-                <TextBox x:Name="epApplicationStatus" Width="100"/>
+                <TextBox x:Name="epApplicationStatus" Width="120"/>
             </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Водитель:"/>
@@ -102,15 +102,14 @@
                 </WrapPanel>
         </StackPanel>
         </GroupBox>
-        <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
-            <ComboBox>
-                <ComboBoxItem Selected="ComboBoxItem_Selected">водитель</ComboBoxItem>
-                <ComboBoxItem Selected="ComboBoxItem_Selected_1">начальник</ComboBoxItem>
-                <ComboBoxItem Selected="ComboBoxItem_Selected_2">босс</ComboBoxItem>
-            </ComboBox>
-            <Button x:Name="editButton" Click="editButton_Click">Изменить</Button>
-            <Button x:Name="acceptOrderButton" Click="acceptOrderButton_Click">Принять заказ</Button>
-            <Button x:Name="addButton" Click="Button_Click">Добавить запись</Button>
-        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="editButton" Click="editButton_Click" Grid.Column="1" FontSize="60" Background="Yellow">Изменить</Button>
+            <Button x:Name="acceptOrderButton" Click="acceptOrderButton_Click" Grid.ColumnSpan="2" FontSize="60">Принять заказ</Button>
+            <Button x:Name="addButton" Click="Button_Click"  FontSize="60" Grid.Column="0" Foreground="White" Background="Red">Добавить запись</Button>
+        </Grid>
     </Grid>
 </Window>

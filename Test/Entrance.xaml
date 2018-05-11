@@ -14,12 +14,9 @@
         </Grid.RowDefinitions>
         <Label FontSize="20" FontWeight="Bold" Grid.Row="0" Content="Вход" HorizontalAlignment="Center"/>
         <WrapPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-                <TextBlock HorizontalAlignment="Center">Логин: </TextBlock>
-                <TextBox x:Name="tbLogin" Height="20" Width="200"></TextBox>
-            
-            
-                <TextBlock HorizontalAlignment="Center">Пароль:</TextBlock>
+            <TextBlock HorizontalAlignment="Center">Логин: </TextBlock>
+            <TextBox x:Name="tbLogin" Height="20" Width="200"></TextBox>
+            <TextBlock HorizontalAlignment="Center">Пароль:</TextBlock>
                 <TextBox x:Name="tbPass" Height="20" Width="200"></TextBox>
             
             <WrapPanel HorizontalAlignment="Center">

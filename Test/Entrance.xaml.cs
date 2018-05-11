@@ -40,9 +40,20 @@ namespace Test
                 {
                     if (tbPass.Text == em.Select(s => s.password).ElementAt(i).ToString())
                     {
-                        id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
-                        rights = bool.Parse(em.Select(s => s.accessRights).ElementAt(i).ToString());
-                        MessageBox.Show("Логин и пароль верный");
+                        new MainWindow().id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
+                        if(bool.Parse(em.Select(s => s.accessRights).ElementAt(i).ToString()) == true)
+                        {
+                            Properties.Settings.Default.rights = 3;
+                            Properties.Settings.Default.Save();
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.rights = 1;
+                            Properties.Settings.Default.Save();
+                        }
+                        
+                        new MainWindow().Show();
+                        new MainWindow().FormHeaderText = "Добро пожаловать";
                         check = true;
                         break;
                     }                                                           

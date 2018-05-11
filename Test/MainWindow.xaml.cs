@@ -27,21 +27,25 @@ namespace Test
     {
 
         JournalDBEntities db = new JournalDBEntities();
+        public int id_employe;
 
         public MainWindow()
         {
             InitializeComponent();
             checkProperty();
-
             //ID.Text = Properties.Settings.Default.rights.ToString();
-            //Properties.Settings.Default.rights = 12;
-            //Properties.Settings.Default.Save(); // для сохранение данных
+            Properties.Settings.Default.rights = 1;
+            Properties.Settings.Default.Save(); // для сохранение данных
 
 
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
         }
 
+        public string FormHeaderText
+        {
+            set { this.Title = value; }
+        }
         private void checkProperty()
         {
             
@@ -124,6 +128,10 @@ namespace Test
         {
             foreach (var item in editPanel.Children)
             {
+                if(item is WrapPanel)
+                {
+                    
+                }
                 foreach (var i in ((WrapPanel)item).Children)
                 {
                     if(i is TextBox) { 
