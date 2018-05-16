@@ -17,6 +17,9 @@
                 <MenuItem Header="Начальник" x:Name="btBoss" Click="btBoss_Click"></MenuItem>
                 <MenuItem Header="Водитель"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Менеджер пользователей">
+                
+            </MenuItem>
         </Menu>
         <DataGrid Name="g1" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="1" SelectionChanged="g1_SelectionChanged">
             <DataGrid.ColumnHeaderStyle>

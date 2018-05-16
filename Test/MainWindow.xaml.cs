@@ -27,11 +27,12 @@ namespace Test
     {
 
         JournalDBEntities db = new JournalDBEntities();
-        public int id_employe;
+        public static int id_employe;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
             checkProperty();
             //ID.Text = Properties.Settings.Default.rights.ToString();
             Properties.Settings.Default.rights = 1;
@@ -42,10 +43,7 @@ namespace Test
             //this.WindowStyle = System.Windows.WindowStyle.None;
         }
 
-        public string FormHeaderText
-        {
-            set { this.Title = value; }
-        }
+      
         private void checkProperty()
         {
             

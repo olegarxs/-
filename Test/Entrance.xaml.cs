@@ -40,7 +40,7 @@ namespace Test
                 {
                     if (tbPass.Text == em.Select(s => s.password).ElementAt(i).ToString())
                     {
-                        new MainWindow().id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
+                        MainWindow.id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
                         if(bool.Parse(em.Select(s => s.accessRights).ElementAt(i).ToString()) == true)
                         {
                             Properties.Settings.Default.rights = 3;
@@ -53,7 +53,6 @@ namespace Test
                         }
                         
                         new MainWindow().Show();
-                        new MainWindow().FormHeaderText = "Добро пожаловать";
                         check = true;
                         break;
                     }                                                           
