@@ -69,5 +69,38 @@ namespace Test
             AddColumn(userData, "accessRights", "Доступ");
         }
 
+        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            addUser.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            addUser.Visibility = Visibility.Visible;
+        }
+
+        private void deleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedUsers.SelectedIndex == 0)
+            {
+                int user_id = (userData.SelectedItem as Driver).id_driver;
+                var driver = context.Driver.Where(x => x.id_driver == user_id).Single();
+                context.Driver.Remove(driver);
+                context.SaveChanges();
+                userData.ItemsSource = context.Driver.ToList();
+            }
+            else
+            {
+                int user_id = (userData.SelectedItem as Employees).id;
+                Employees employees = context.Employees.Where(x => x.id== user_id).FirstOrDefault();
+                context.Employees.Remove(employees);
+                context.SaveChanges();
+                userData.ItemsSource = context.Employees.ToList();
+            }
+            //int user_id = userData.SelectedItem is Employees ?
+            //    (userData.SelectedItem as Employees).id :
+            //    (userData.SelectedItem as Driver).id_driver;
+
+        }
     }
 }

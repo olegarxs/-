@@ -16,7 +16,7 @@
             <TextBlock Margin="10,0,10,0">
                 Просмотреть:
             </TextBlock>
-            <ComboBox MinWidth="100">
+            <ComboBox x:Name="selectedUsers" MinWidth="100">
                 <ComboBoxItem Selected="ComboBoxItem_Selected">Водителей</ComboBoxItem>
                 <ComboBoxItem Selected="ComboBoxItem_Selected_1">Начальников</ComboBoxItem>
             </ComboBox>
@@ -24,50 +24,66 @@
         <DataGrid x:Name="userData" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False">
         </DataGrid>
         <WrapPanel Grid.Row="2" VerticalAlignment="Bottom">
-            <Button>Добавить пользователя</Button>
-            <Button>Удалить</Button>
+            <Button Click="Button_Click">Добавить пользователя</Button>
+            <Button x:Name="deleteUser" Click="deleteUser_Click">Удалить</Button>
             <Button>Изменить</Button>
         </WrapPanel>
-        <WrapPanel Orientation="Vertical" Grid.RowSpan="3" Grid.Row="0" Background="red">
-            <WrapPanel>
-            <TextBlock Text="Добавить: "/>
-            <ComboBox Height="20" Width="100">
-                <ComboBoxItem>Водителя</ComboBoxItem>
-                <ComboBoxItem>Начальника</ComboBoxItem>
-            </ComboBox>
-            </WrapPanel>
-                <WrapPanel Visibility="Hidden" Orientation="Vertical">
-                    <WrapPanel>
-                        <TextBlock Text="ФИО: "/>
-                        <TextBox Width="100"/>
-                    </WrapPanel>
-                    <WrapPanel>
-                        <TextBlock Text="Логин: "/>
-                        <TextBox Width="100"/>
-                    </WrapPanel>
-                    <WrapPanel>
-                        <TextBlock Text="Пароль: "/>
-                        <TextBox Width="100"/>
-                    </WrapPanel>
-                    <WrapPanel>
-                        <TextBlock Text="Доступ: "/>
-                        <ComboBox Width="100">
-                            <ComboBoxItem>Полный</ComboBoxItem>
-                            <ComboBoxItem IsSelected="True">Не полный</ComboBoxItem>
-                        </ComboBox>
-                    </WrapPanel>
-                    <Button Content="Добавить"/>
-                 </WrapPanel>
-                <WrapPanel Orientation="Vertical">
-                    <WrapPanel>
-                            <TextBlock Text="ФИО: "/>
-                            <TextBox Width="100"/>
-                    </WrapPanel>
-                    <WrapPanel>
-                        <TextBlock Text="Телефон: "/>
-                        <TextBox Width="100"/>
-                    </WrapPanel>
+        <Grid x:Name="addUser" Grid.RowSpan="3" Visibility="Hidden" Grid.Row="0" Background="red">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29*"/>
+                <RowDefinition Height="390*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="hello"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Background="Transparent" Margin="30,10" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+                <Rectangle Height="5" Width="30" Fill="Yellow">
+                    <Rectangle.LayoutTransform>
+                        <RotateTransform Angle="-45"/>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+                <Rectangle Height="5" Width="30" Fill="Yellow">
+                    <Rectangle.LayoutTransform>
+                        <RotateTransform Angle="45"/>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+            </Canvas>
+            <WrapPanel  Orientation="Vertical" Width="300" Grid.Column="0" Margin="48,0" Grid.Row="1">
+                <TextBlock Text="Добавить сотрудника" FontSize="16" FontWeight="Bold"  Height="49" Width="181"/>
+                <WrapPanel Height="26">
+                    <TextBlock Text="ФИО: " Width="46"/>
+                    <TextBox Width="100"/>
                 </WrapPanel>
-        </WrapPanel>
+                <WrapPanel Height="30">
+                    <TextBlock Text="Логин: " Width="46"/>
+                    <TextBox Width="100"/>
+                </WrapPanel>
+                <WrapPanel Height="31">
+                    <TextBlock Text="Пароль: "/>
+                    <TextBox Width="100"/>
+                </WrapPanel>
+                <WrapPanel Height="34">
+                    <TextBlock Text="Доступ: " Width="49"/>
+                    <ComboBox Width="100">
+                        <ComboBoxItem>Полный</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">Не полный</ComboBoxItem>
+                    </ComboBox>
+                </WrapPanel>
+                <Button Content="Добавить" Width="98"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Grid.Column="1" Margin="154,0,64,0" Grid.Row="1">
+                <TextBlock Text="Добавить водителя"  FontSize="16" FontWeight="Bold" Width="280" Height="53"/>
+                <WrapPanel Height="30">
+                    <TextBlock Text="ФИО: " Width="51"/>
+                    <TextBox Width="100"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Телефон: "/>
+                    <TextBox Width="100"/>
+                </WrapPanel>
+                <Button Content="Добавить" Width="100" Margin="10,20,10,10"/>
+            </WrapPanel>
+        </Grid>
     </Grid>
 </Window>
