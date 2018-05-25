@@ -26,7 +26,7 @@
         <WrapPanel Grid.Row="2" VerticalAlignment="Bottom">
             <Button Click="Button_Click">Добавить пользователя</Button>
             <Button x:Name="deleteUser" Click="deleteUser_Click">Удалить</Button>
-            <Button>Изменить</Button>
+            <Button x:Name="editUser" Click="editUser_Click">Изменить</Button>
         </WrapPanel>
         <Grid x:Name="addUser" Grid.RowSpan="3" Visibility="Hidden" Grid.Row="0" Background="red">
             <Grid.RowDefinitions>
