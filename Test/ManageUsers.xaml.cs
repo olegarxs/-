@@ -23,13 +23,11 @@ namespace Test
         JournalDBEntities context = new JournalDBEntities();
         public ManageUsers()
         {
-            
             InitializeComponent();
         }
 
         private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-
             userData.Columns.Clear();
             fillingTableDriver();
             userData.ItemsSource = context.Driver.ToList();
@@ -71,6 +69,12 @@ namespace Test
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            
+            if (selectedUsers.SelectedIndex == 0)
+                ComboBoxItem_Selected(null, null);
+            else
+            ComboBoxItem_Selected_1(null, null);
+
             addUser.Visibility = Visibility.Hidden;
         }
 
@@ -86,7 +90,6 @@ namespace Test
                 int user_id = (userData.SelectedItem as Driver).id_driver;
                 var driver = context.Driver.Where(x => x.id_driver == user_id).First();
                 context.Entry(driver).State = EntityState.Deleted;
-                //context.Driver.Remove(driver);
                 context.SaveChanges();
                 userData.ItemsSource = context.Driver.ToList();
             }
@@ -94,7 +97,6 @@ namespace Test
             {
                 int user_id = (userData.SelectedItem as Employees).id;
                 Employees employees = context.Employees.Where(x => x.id== user_id).First();
-                //context.Employees.Remove(employees);
                 context.Entry(employees).State = EntityState.Deleted;
                 context.SaveChanges();
                 userData.ItemsSource = context.Employees.ToList();
@@ -107,12 +109,55 @@ namespace Test
 
         private void editUser_Click(object sender, RoutedEventArgs e)
         {
-            //var el = 
+            if (selectedUsers.SelectedIndex == 0)
+            {
+                int user_id = (userData.SelectedItem as Driver).id_driver;
+                var driver = context.Driver.Where(x => x.id_driver == user_id).First();
+                context.Entry(driver).State = EntityState.Deleted;
+                context.SaveChanges();
+                userData.ItemsSource = context.Driver.ToList();
+            }
+            else
+            {
+                int user_id = (userData.SelectedItem as Employees).id;
+                Employees employees = context.Employees.Where(x => x.id == user_id).First();
+                context.Entry(employees).State = EntityState.Deleted;
+                context.SaveChanges();
+                userData.ItemsSource = context.Employees.ToList();
+            }
         }
 
         private void editDriver()
         {
-            var data = (userData.SelectedItem as Driver).
+            var data = (userData.SelectedItem as Driver);
+        }
+
+        private void btAddDriver_Click(object sender, RoutedEventArgs e)
+        {
+            Driver d = new Driver
+            {
+                name = tbFirstAndLastNameDriver.Text,
+                mobilePhone = tbMobilePhone.Text,
+                status = false
+            };
+            context.Driver.Add(d);
+            context.SaveChanges();
+            MessageBox.Show("Запись добавлена");
+
+        }
+
+        private void btAddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Employees employee = new Employees()
+            {
+                fullName = tbFullNameEmployee.Text,
+                login = tbLoginEmployee.Text,
+                password = tbPassEmployee.Text,
+                accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false
+            };
+            context.Employees.Add(employee);
+            context.SaveChanges();
+            MessageBox.Show("Запись добавлена");
         }
     }
 }
