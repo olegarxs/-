@@ -111,20 +111,29 @@ namespace Test
         {
             if (selectedUsers.SelectedIndex == 0)
             {
-                int user_id = (userData.SelectedItem as Driver).id_driver;
-                var driver = context.Driver.Where(x => x.id_driver == user_id).First();
-                context.Entry(driver).State = EntityState.Deleted;
-                context.SaveChanges();
-                userData.ItemsSource = context.Driver.ToList();
+                addUser.Visibility = Visibility.Visible;
+                panelEmployee.Visibility = Visibility.Collapsed;
+                panelDriver.SetCurrentValue(Grid.ColumnSpanProperty, 2);
+                panelDriver.SetCurrentValue(Grid.ColumnProperty, 0);
             }
             else
             {
-                int user_id = (userData.SelectedItem as Employees).id;
-                Employees employees = context.Employees.Where(x => x.id == user_id).First();
-                context.Entry(employees).State = EntityState.Deleted;
-                context.SaveChanges();
-                userData.ItemsSource = context.Employees.ToList();
+                //int user_id = (userData.SelectedItem as Employees).id;
+                //Employees employees = context.Employees.Where(x => x.id == user_id).First();
+                //context.Entry(employees).State = EntityState.Deleted;
+                //context.SaveChanges();
+                //userData.ItemsSource = context.Employees.ToList();
             }
+        }
+
+        private void defaultPropertyAddUser()
+        {
+            panelEmployee.Visibility = Visibility.Visible;
+            panelEmployee.SetCurrentValue(Grid.ColumnSpanProperty, 1);
+            panelEmployee.SetCurrentValue(Grid.ColumnProperty, 0);
+            panelDriver.Visibility = Visibility.Visible;
+            panelDriver.SetCurrentValue(Grid.ColumnSpanProperty, 1);
+            panelDriver.SetCurrentValue(Grid.ColumnProperty, 1);
         }
 
         private void editDriver()

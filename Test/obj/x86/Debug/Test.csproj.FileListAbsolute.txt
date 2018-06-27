@@ -48,3 +48,5 @@ D:\BSUIR\Test\Test\obj\x86\Debug\Test.exe
 D:\BSUIR\Test\Test\obj\x86\Debug\Test.pdb
 D:\BSUIR\Test\Test\obj\x86\Debug\ManageUsers.g.cs
 D:\BSUIR\Test\Test\obj\x86\Debug\ManageUsers.baml
+C:\Users\Oleg\Desktop\fsd\Belhudojpromblslabl\Test\obj\x86\Debug\ManageUsers.g.cs
+C:\Users\Oleg\Desktop\fsd\Belhudojpromblslabl\Test\obj\x86\Debug\ManageUsers.baml
