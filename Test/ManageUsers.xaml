@@ -28,7 +28,7 @@
             <Button x:Name="deleteUser" Click="deleteUser_Click">Удалить</Button>
             <Button x:Name="editUser" Click="editUser_Click">Изменить</Button>
         </WrapPanel>
-        <Grid x:Name="addUser" Visibility="Hidden" Grid.RowSpan="3" Grid.Row="0" Background="red">
+        <Grid x:Name="addUser" Visibility="Visible" Grid.RowSpan="3" Grid.Row="0" Background="red">
             <Grid.RowDefinitions>
                 <RowDefinition Height="29*"/>
                 <RowDefinition Height="390*"/>
@@ -73,7 +73,7 @@
                 <Button x:Name="btAddEmployee" Click="btAddEmployee_Click" Content="Добавить" Width="100" Margin="10"/>
             </WrapPanel>
             <WrapPanel Name="panelDriver" Orientation="Vertical" Grid.Column ="1"  HorizontalAlignment="Center"  Grid.Row="1">
-                <TextBlock Text="Добавить водителя"  FontSize="16" FontWeight="Bold" Height="53"/>
+                <TextBlock Name="tbTitleDriver" Text="Добавить водителя"  FontSize="16" FontWeight="Bold" Height="53"/>
                 <WrapPanel Height="30">
                     <TextBlock Text="ФИО: " Width="51"/>
                     <TextBox Name="tbFirstAndLastNameDriver" Width="100"/>

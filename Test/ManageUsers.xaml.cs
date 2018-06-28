@@ -101,11 +101,12 @@ namespace Test
                 context.SaveChanges();
                 userData.ItemsSource = context.Employees.ToList();
             }
-            //int user_id = userData.SelectedItem is Employees ?
-            //    (userData.SelectedItem as Employees).id :
-            //    (userData.SelectedItem as Driver).id_driver;
-
         }
+
+
+        private string[] titleDriver = { "Добавить водителя", "Редактировать водителя" };
+        private string[] titleEmployee = { "Добавить сотрудника", "Редактировать сотрудника" };
+        
 
         private void editUser_Click(object sender, RoutedEventArgs e)
         {
@@ -115,6 +116,8 @@ namespace Test
                 panelEmployee.Visibility = Visibility.Collapsed;
                 panelDriver.SetCurrentValue(Grid.ColumnSpanProperty, 2);
                 panelDriver.SetCurrentValue(Grid.ColumnProperty, 0);
+                tbTitleDriver.Text = titleDriver[1];
+
             }
             else
             {
