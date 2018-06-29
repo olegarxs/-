@@ -24,11 +24,18 @@
         <DataGrid x:Name="userData" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False">
         </DataGrid>
         <WrapPanel Grid.Row="2" VerticalAlignment="Bottom">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </WrapPanel.Resources>
             <Button Click="Button_Click">Добавить пользователя</Button>
             <Button x:Name="deleteUser" Click="deleteUser_Click">Удалить</Button>
             <Button x:Name="editUser" Click="editUser_Click">Изменить</Button>
+                
         </WrapPanel>
-        <Grid x:Name="addUser" Visibility="Visible" Grid.RowSpan="3" Grid.Row="0" Background="red">
+        <Grid x:Name="addUser" Visibility="Hidden" Grid.RowSpan="3" Grid.Row="0" Background="red">
             <Grid.RowDefinitions>
                 <RowDefinition Height="29*"/>
                 <RowDefinition Height="390*"/>
@@ -50,7 +57,7 @@
                 </Rectangle>
             </Canvas>
             <WrapPanel Name="panelEmployee" Visibility="Visible"  Orientation="Vertical"  Grid.Column="0"  HorizontalAlignment="Center" Grid.Row="1">
-                <TextBlock Text="Добавить сотрудника" FontSize="16" FontWeight="Bold"  Height="49" Width="181"/>
+                <TextBlock Name="tbTitleEmployee" Text="Добавить сотрудника" FontSize="16" FontWeight="Bold"  Height="49" Width="181"/>
                 <WrapPanel Height="26">
                     <TextBlock Text="ФИО: " Width="46"/>
                     <TextBox Name="tbFullNameEmployee" Width="100"/>
@@ -76,7 +83,7 @@
                 <TextBlock Name="tbTitleDriver" Text="Добавить водителя"  FontSize="16" FontWeight="Bold" Height="53"/>
                 <WrapPanel Height="30">
                     <TextBlock Text="ФИО: " Width="51"/>
-                    <TextBox Name="tbFirstAndLastNameDriver" Width="100"/>
+                    <TextBox Name="tbFullNameDriver" Width="100"/>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Телефон: "/>

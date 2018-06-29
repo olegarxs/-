@@ -47,10 +47,10 @@ namespace Test
             AddColumn(userData, "mobilePhone", "Телефон");
         }
 
-        private void AddColumn(DataGrid dataGrid,string nameColumn, string headerColumn)
+        private void AddColumn(DataGrid dataGrid, string nameColumn, string headerColumn)
         {
             Binding binding = new Binding(nameColumn);
-            DataGridTextColumn column= new DataGridTextColumn()
+            DataGridTextColumn column = new DataGridTextColumn()
             {
                 Binding = binding,
                 Header = headerColumn
@@ -69,12 +69,13 @@ namespace Test
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+
             if (selectedUsers.SelectedIndex == 0)
                 ComboBoxItem_Selected(null, null);
             else
-            ComboBoxItem_Selected_1(null, null);
+                ComboBoxItem_Selected_1(null, null);
 
+            defaultPropertyAddUser();
             addUser.Visibility = Visibility.Hidden;
         }
 
@@ -85,7 +86,7 @@ namespace Test
 
         private void deleteUser_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedUsers.SelectedIndex == 0)
+            if (selectedUsers.SelectedIndex == 0)
             {
                 int user_id = (userData.SelectedItem as Driver).id_driver;
                 var driver = context.Driver.Where(x => x.id_driver == user_id).First();
@@ -96,7 +97,7 @@ namespace Test
             else
             {
                 int user_id = (userData.SelectedItem as Employees).id;
-                Employees employees = context.Employees.Where(x => x.id== user_id).First();
+                Employees employees = context.Employees.Where(x => x.id == user_id).First();
                 context.Entry(employees).State = EntityState.Deleted;
                 context.SaveChanges();
                 userData.ItemsSource = context.Employees.ToList();
@@ -106,7 +107,7 @@ namespace Test
 
         private string[] titleDriver = { "Добавить водителя", "Редактировать водителя" };
         private string[] titleEmployee = { "Добавить сотрудника", "Редактировать сотрудника" };
-        
+
 
         private void editUser_Click(object sender, RoutedEventArgs e)
         {
@@ -117,26 +118,78 @@ namespace Test
                 panelDriver.SetCurrentValue(Grid.ColumnSpanProperty, 2);
                 panelDriver.SetCurrentValue(Grid.ColumnProperty, 0);
                 tbTitleDriver.Text = titleDriver[1];
+                btAddDriver.Content = titleDriver[1].Split(' ')[0].ToString();
+                
 
+                int user_id = (userData.SelectedItem as Driver).id_driver;
+                var driver = context.Driver.Where(x => x.id_driver == user_id).First();
+                tbFullNameDriver.Text = driver.name;
+                tbMobilePhone.Text = driver.mobilePhone;
+                editUser.Tag = driver.id_driver;
             }
             else
             {
-                //int user_id = (userData.SelectedItem as Employees).id;
-                //Employees employees = context.Employees.Where(x => x.id == user_id).First();
-                //context.Entry(employees).State = EntityState.Deleted;
-                //context.SaveChanges();
-                //userData.ItemsSource = context.Employees.ToList();
+                addUser.Visibility = Visibility.Visible;
+                panelDriver.Visibility = Visibility.Collapsed;
+                panelEmployee.SetCurrentValue(Grid.ColumnSpanProperty, 2);
+                panelEmployee.SetCurrentValue(Grid.ColumnProperty, 0);
+                tbTitleEmployee.Text = titleEmployee[1];
+                btAddEmployee.Content = titleEmployee[1].Split(' ')[0].ToString();
+
+                int user_id = (userData.SelectedItem as Employees).id;
+                var employee = context.Employees.Where(x => x.id == user_id).First();
+                tbFullNameEmployee.Text = employee.fullName;
+                tbLoginEmployee.Text = employee.login;
+                tbPassEmployee.Text = employee.password;
+                cbAcсessEmployee.Text = (employee.accessRights == true) ? "Полный" : "Не полный";
+                editUser.Tag = employee.id;
             }
         }
 
         private void defaultPropertyAddUser()
         {
+            tbTitleDriver.Text = titleDriver[0];
+            btAddDriver.Content = titleDriver[0].Split(' ')[0];
+
+            tbTitleEmployee.Text = titleEmployee[0];
+            btAddEmployee.Content = titleEmployee[0].Split(' ')[0];
+
+
             panelEmployee.Visibility = Visibility.Visible;
             panelEmployee.SetCurrentValue(Grid.ColumnSpanProperty, 1);
             panelEmployee.SetCurrentValue(Grid.ColumnProperty, 0);
             panelDriver.Visibility = Visibility.Visible;
             panelDriver.SetCurrentValue(Grid.ColumnSpanProperty, 1);
             panelDriver.SetCurrentValue(Grid.ColumnProperty, 1);
+            clearData();
+        }
+
+        private void clearData()
+        {
+            foreach (var item in panelDriver.Children)
+            {
+                if (item is WrapPanel)
+                {
+                    foreach (var i in (item as WrapPanel).Children)
+                    {
+                        if (i is TextBox)
+                        {
+                            (i as TextBox).Text = string.Empty;
+                        }
+                    }
+                }
+            }
+            foreach (var item in panelEmployee.Children)
+            {
+                if(item is WrapPanel)
+                foreach (var i in (item as WrapPanel).Children)
+                {
+                    if (i is TextBox)
+                    {
+                        (i as TextBox).Text = string.Empty;
+                    }
+                }
+            }
         }
 
         private void editDriver()
@@ -146,30 +199,53 @@ namespace Test
 
         private void btAddDriver_Click(object sender, RoutedEventArgs e)
         {
-            Driver d = new Driver
+            if (btAddDriver.Content.ToString() == "Добавить")
             {
-                name = tbFirstAndLastNameDriver.Text,
-                mobilePhone = tbMobilePhone.Text,
-                status = false
-            };
-            context.Driver.Add(d);
-            context.SaveChanges();
-            MessageBox.Show("Запись добавлена");
-
+                Driver d = new Driver
+                {
+                    name = tbFullNameDriver.Text,
+                    mobilePhone = tbMobilePhone.Text,
+                    status = false
+                };
+                context.Driver.Add(d);
+                context.SaveChanges();
+                MessageBox.Show("Запись добавлена");
+            }
+            else
+            {
+                var driver = context.Driver.Where(x => x.id_driver == (int)editUser.Tag).First();
+                driver.name = tbFullNameDriver.Text;
+                driver.mobilePhone = tbMobilePhone.Text;
+                Canvas_MouseLeftButtonDown(null, null);
+                
+            }
         }
 
         private void btAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Employees employee = new Employees()
-            {
-                fullName = tbFullNameEmployee.Text,
-                login = tbLoginEmployee.Text,
-                password = tbPassEmployee.Text,
-                accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false
-            };
+            if (btAddDriver.Content.ToString() == "Добавить") { 
+                Employees employee = new Employees()
+                {
+                    fullName = tbFullNameEmployee.Text,
+                    login = tbLoginEmployee.Text,
+                    password = tbPassEmployee.Text,
+                    accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false
+                };
             context.Employees.Add(employee);
             context.SaveChanges();
             MessageBox.Show("Запись добавлена");
+            }
+            else
+            {
+                var employee = context.Employees.Where(x => x.id == (int)editUser.Tag).First();
+                employee.fullName = tbFullNameEmployee.Text;
+                employee.login = tbLoginEmployee.Text;
+                employee.password = tbPassEmployee.Text;
+                employee.accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false;
+                Canvas_MouseLeftButtonDown(null, null);
+
+                //Дописать изменение записи при нажатии на кнопку
+            }
         }
     }
 }
