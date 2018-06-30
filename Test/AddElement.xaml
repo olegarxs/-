@@ -2,6 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddElement" Height="491" Width="500">
+    <Window.Resources>
+        <ResourceDictionary Source="Design.xaml"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -36,8 +39,8 @@
             <TextBox Name="tbCargo" />
             <Label Content="Предпологаемый маршрут движения"/>
             <TextBox Name="tbRoute"/>
-            <StackPanel Name="hide" Visibility="Hidden">
-                <TextBlock Padding="5,0,0,0" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
+            <StackPanel Name="hide" Visibility="Collapsed">
+                <TextBlock Padding="5,0,0,0" Foreground="Black" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
                 <TextBox Name="tbNameDocument" Margin="0,0,0,10"/>
             </StackPanel>
             <!--<Label Content="Статус заказа:"/>
@@ -46,7 +49,7 @@
                 <ComboBoxItem>В действии</ComboBoxItem>
                 <ComboBoxItem>Выполнен</ComboBoxItem>
             </ComboBox>-->
-            <Button Name="btnAddOrder" Click="btnAddOrder_Click">Добавить заказ</Button>
+            <Button Name="btnAddOrder" Style="{StaticResource BaseButton}" Margin="10" Click="btnAddOrder_Click">Добавить заказ</Button>
         </StackPanel>
     </Grid>
 </Window>

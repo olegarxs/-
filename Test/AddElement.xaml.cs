@@ -55,7 +55,7 @@ namespace Test
                 tbNameDocument.Text = "";
             }
             else {
-                hide.Visibility = Visibility.Hidden;
+                hide.Visibility = Visibility.Collapsed;
                 tbNameDocument.Text = "Нет";
             }
         }

@@ -37,7 +37,7 @@ namespace Test
             {
                 if(item.login == tbLogin.Text)
                 {
-                    if(item.password == tbPass.Text)
+                    if(item.password == tbPass.Password)
                     {
                         Properties.Settings.Default.idUser = item.id;
 
@@ -54,7 +54,9 @@ namespace Test
 
                         new MainWindow().Show();
                         check = true;
+                        this.Close();
                         break;
+                        
                     }
                 }
             }

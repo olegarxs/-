@@ -168,14 +168,14 @@ namespace Test
         private void settingForDriver()
         {
             this.Title = "Добро пожаловать";
-            setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Visible, true);
+            setting(true, Visibility.Collapsed, Visibility.Collapsed, Visibility.Visible, true);
         }
 
         private void settingForChief()
         {
             id_employe = Properties.Settings.Default.idUser;
             this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
-            setting(true,Visibility.Visible,Visibility.Hidden, Visibility.Hidden,false);
+            setting(true,Visibility.Visible,Visibility.Collapsed, Visibility.Collapsed,false);
         }
 
         private void setting(bool onlyReadEditPanel,Visibility visibilityAddButton,
@@ -192,7 +192,7 @@ namespace Test
         {
             id_employe = Properties.Settings.Default.idUser;
             this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
-            setting(false, Visibility.Visible, Visibility.Visible, Visibility.Hidden, true);
+            setting(false, Visibility.Visible, Visibility.Visible, Visibility.Collapsed, true);
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
