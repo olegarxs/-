@@ -27,13 +27,12 @@ namespace Test
     {
 
         JournalDBEntities db = new JournalDBEntities();
-        public static int id_employe;
+        public int id_employe;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
-            checkProperty();
+            checkProperty(Properties.Settings.Default.rights);
             //ID.Text = Properties.Settings.Default.rights.ToString();
             Properties.Settings.Default.rights = 1;
             Properties.Settings.Default.Save(); // для сохранение данных
@@ -44,12 +43,13 @@ namespace Test
         }
 
       
-        private void checkProperty()
+        private void checkProperty(int number)
         {
             
             
-            ID.Text = Properties.Settings.Default.rights.ToString();
-            switch (Properties.Settings.Default.rights)
+            //ID.Text = Properties.Settings.Default.rights.ToString();
+
+            switch (number)
             {
                 case (byte)Rights.People:
                     settingForSimplePeople();
@@ -143,6 +143,7 @@ namespace Test
         }
         private void settingForSimplePeople()
         {
+            this.Title = "Добро пожаловать";
             setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Hidden, false);
         }
 
@@ -166,11 +167,14 @@ namespace Test
 
         private void settingForDriver()
         {
+            this.Title = "Добро пожаловать";
             setting(true, Visibility.Hidden, Visibility.Hidden, Visibility.Visible, true);
         }
 
         private void settingForChief()
         {
+            id_employe = Properties.Settings.Default.idUser;
+            this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
             setting(true,Visibility.Visible,Visibility.Hidden, Visibility.Hidden,false);
         }
 
@@ -186,6 +190,8 @@ namespace Test
 
         private void settingForBoss()
         {
+            id_employe = Properties.Settings.Default.idUser;
+            this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
             setting(false, Visibility.Visible, Visibility.Visible, Visibility.Hidden, true);
         }
 
@@ -199,9 +205,9 @@ namespace Test
             cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
             cellEdit.route = epRoute.Text;
             cellEdit.nameDocument = epNameDocument.Text;
-            cellEdit.id_employe = int.Parse(epLastName.Text);
+            cellEdit.id_employe = db.Employees.Where(x =>x.fullName == epLastName.Text).First().id;
             cellEdit.cargo = epCargo.Text;
-            cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
+            cellEdit.id_driver = (int?)epDriver.SelectedValue;
             cellEdit.applicationStatus = epApplicationStatus.Text;
             db.SaveChanges();
             g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();

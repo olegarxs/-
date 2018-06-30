@@ -37,7 +37,7 @@ namespace Test
             d.cargo = tbCargo.Text;
             d.route = tbRoute.Text;
             d.nameDocument = tbNameDocument.Text;
-            d.id_employe = int.Parse(tbLastName.Text);
+            d.id_employe = Properties.Settings.Default.idUser;
             d.nameDocument = "Нет";
             d.applicationStatus = "Не выполненно";
             db.Data.Add(d);
@@ -51,11 +51,11 @@ namespace Test
             ComboBoxItem selectedItem = (ComboBoxItem)cb.SelectedItem;
             if (selectedItem.Content.ToString() == "Грузовая")
             {
-                hide.Visibility = System.Windows.Visibility.Visible;
+                hide.Visibility = Visibility.Visible;
                 tbNameDocument.Text = "";
             }
             else {
-                hide.Visibility = System.Windows.Visibility.Hidden;
+                hide.Visibility = Visibility.Hidden;
                 tbNameDocument.Text = "Нет";
             }
         }

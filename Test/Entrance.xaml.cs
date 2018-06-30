@@ -30,35 +30,35 @@ namespace Test
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             JournalDBEntities db = new JournalDBEntities();
-            List<Employees> em = db.Employees.ToList();
             bool check = false;
 
-            for (int i = 0; i <  db.Employees.Count(); i++)
+
+            foreach (var item in db.Employees)
             {
-                string login = em.Select(s => s.login).ElementAt(i).ToString();
-                if (tbLogin.Text == login)
+                if(item.login == tbLogin.Text)
                 {
-                    if (tbPass.Text == em.Select(s => s.password).ElementAt(i).ToString())
+                    if(item.password == tbPass.Text)
                     {
-                        MainWindow.id_employe = int.Parse(em.Select(s => s.id).ElementAt(i).ToString());
-                        if(bool.Parse(em.Select(s => s.accessRights).ElementAt(i).ToString()) == true)
+                        Properties.Settings.Default.idUser = item.id;
+
+                        if (item.accessRights == true)
                         {
                             Properties.Settings.Default.rights = 3;
                             Properties.Settings.Default.Save();
                         }
                         else
                         {
-                            Properties.Settings.Default.rights = 1;
+                            Properties.Settings.Default.rights = 2;
                             Properties.Settings.Default.Save();
                         }
-                        
+
                         new MainWindow().Show();
                         check = true;
                         break;
-                    }                                                           
+                    }
                 }
             }
-            if(check == false)
+            if (check == false)
             {
                 MessageBox.Show("Вы ввели неверный логин или пароль");
             }

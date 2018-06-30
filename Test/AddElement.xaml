@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Test.AddElement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddElement" Height="600" Width="500">
+        Title="AddElement" Height="491" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -36,9 +36,6 @@
             <TextBox Name="tbCargo" />
             <Label Content="Предпологаемый маршрут движения"/>
             <TextBox Name="tbRoute"/>
-            
-            <Label Content="Фамилия заказчика автомобиля"/>
-            <TextBox Name="tbLastName"/>
             <StackPanel Name="hide" Visibility="Hidden">
                 <TextBlock Padding="5,0,0,0" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
                 <TextBox Name="tbNameDocument" Margin="0,0,0,10"/>
