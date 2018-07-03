@@ -63,6 +63,7 @@ namespace Test
         {
             AddColumn(userData, "id", "ID");
             AddColumn(userData, "fullName", "ФИО");
+            AddColumn(userData, "department", "Отдел");
             AddColumn(userData, "login", "Логин");
             AddColumn(userData, "accessRights", "Доступ");
         }
@@ -139,6 +140,7 @@ namespace Test
                 int user_id = (userData.SelectedItem as Employees).id;
                 var employee = context.Employees.Where(x => x.id == user_id).First();
                 tbFullNameEmployee.Text = employee.fullName;
+                tbDepartmentEmployee.Text = employee.department;
                 tbLoginEmployee.Text = employee.login;
                 tbPassEmployee.Text = employee.password;
                 cbAcсessEmployee.Text = (employee.accessRights == true) ? "Полный" : "Не полный";
@@ -227,6 +229,7 @@ namespace Test
                 Employees employee = new Employees()
                 {
                     fullName = tbFullNameEmployee.Text,
+                    department = tbDepartmentEmployee.Text,
                     login = tbLoginEmployee.Text,
                     password = tbPassEmployee.Text,
                     accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false
@@ -239,6 +242,7 @@ namespace Test
             {
                 var employee = context.Employees.Where(x => x.id == (int)editUser.Tag).First();
                 employee.fullName = tbFullNameEmployee.Text;
+                employee.department = tbDepartmentEmployee.Text;
                 employee.login = tbLoginEmployee.Text;
                 employee.password = tbPassEmployee.Text;
                 employee.accessRights = (cbAcсessEmployee.Text == "Полный") ? true : false;

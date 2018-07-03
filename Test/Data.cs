@@ -15,7 +15,6 @@ namespace Test
     public partial class Data
     {
         public int id { get; set; }
-        public string name { get; set; }
         public string applicationDateAndTime { get; set; }
         public string dateAndTimeOfCarProvision { get; set; }
         public string purposesOfUsingAuto { get; set; }

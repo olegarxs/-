@@ -29,7 +29,6 @@ namespace Test
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
             Data d = new Data();
-            d.name = tbName.Text;
             string timeNow = DateTime.Now.ToString("dd.MM.yy hh:mm");
             d.applicationDateAndTime = timeNow + "," + tbCar.Text;
             d.dateAndTimeOfCarProvision = dtpick.Text + " " + tbHours.Text + ":" + tbMinuts.Text;

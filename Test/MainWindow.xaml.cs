@@ -89,7 +89,7 @@ namespace Test
 
         public async Task UpdataTable()
         {
-                var dataGrid = db.Data.ToList().AsEnumerable().Reverse().Take(5);
+                var dataGrid = db.Data.ToList().AsEnumerable().Reverse().Take(10);
                 g1.ItemsSource = dataGrid;
                 await Task.Delay(5000);
         }
@@ -105,7 +105,7 @@ namespace Test
             DataGrid gd = (DataGrid)sender;
             Data row = (Data)gd.SelectedItem;
             epID.Text = row.id.ToString();
-            epName.Text = row.name.ToString();
+            epName.Text = row.Employees.department.ToString();
             epApplicationDateAndTime.Text = row.applicationDateAndTime.ToString();
             epDateAndTimeOfCarProvision.Text = row.dateAndTimeOfCarProvision.ToString();
             epPurposesOfUsingAuto.Text = row.purposesOfUsingAuto.ToString();
@@ -150,8 +150,7 @@ namespace Test
         private void acceptOrderButton_Click(object sender, RoutedEventArgs e)
         {
             int cell = Convert.ToInt32(epID.Text);
-            var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();
-            cellEdit.name = epName.Text;
+            var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();  
             cellEdit.applicationDateAndTime = epApplicationDateAndTime.Text;
             cellEdit.dateAndTimeOfCarProvision = epDateAndTimeOfCarProvision.Text;
             cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
@@ -199,7 +198,6 @@ namespace Test
         {
             int cell = Convert.ToInt32(epID.Text);
             var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();
-            cellEdit.name = epName.Text;
             cellEdit.applicationDateAndTime = epApplicationDateAndTime.Text;
             cellEdit.dateAndTimeOfCarProvision = epDateAndTimeOfCarProvision.Text;
             cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
@@ -207,7 +205,7 @@ namespace Test
             cellEdit.nameDocument = epNameDocument.Text;
             cellEdit.id_employe = db.Employees.Where(x =>x.fullName == epLastName.Text).First().id;
             cellEdit.cargo = epCargo.Text;
-            cellEdit.id_driver = (int?)epDriver.SelectedValue;
+            cellEdit.id_driver = epDriver.SelectedValue != null ? int.Parse(epDriver.SelectedValue.ToString()) : (int?)null ;
             cellEdit.applicationStatus = epApplicationStatus.Text;
             db.SaveChanges();
             g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
@@ -231,6 +229,11 @@ namespace Test
         private void ComboBoxItem_Selected_2(object sender, RoutedEventArgs e)
         {
             settingForBoss();
+        }
+
+        private void btManageUser_Click(object sender, RoutedEventArgs e)
+        {
+            new ManageUsers().Show();
         }
     }
 }

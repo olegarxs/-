@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="ManageUsers" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="Design.xaml"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -24,18 +27,18 @@
         <DataGrid x:Name="userData" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False">
         </DataGrid>
         <WrapPanel Grid.Row="2" VerticalAlignment="Bottom">
-            <WrapPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="FontSize" Value="16"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                </Style>
-            </WrapPanel.Resources>
-            <Button Click="Button_Click">Добавить пользователя</Button>
-            <Button x:Name="deleteUser" Click="deleteUser_Click">Удалить</Button>
-            <Button x:Name="editUser" Click="editUser_Click">Изменить</Button>
+
+            <Button Click="Button_Click" Style="{StaticResource BaseButton}">Добавить пользователя</Button>
+            <Button x:Name="deleteUser" Click="deleteUser_Click" Style="{StaticResource BaseButton}">Удалить</Button>
+            <Button x:Name="editUser" Click="editUser_Click" Style="{StaticResource BaseButton}">Изменить</Button>
                 
         </WrapPanel>
-        <Grid x:Name="addUser" Visibility="Hidden" Grid.RowSpan="3" Grid.Row="0" Background="red">
+        <Grid x:Name="addUser" Visibility="Visible" Grid.RowSpan="3" Grid.Row="0" Background="#64566e">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="29*"/>
                 <RowDefinition Height="390*"/>
@@ -45,12 +48,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Canvas Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Background="Transparent" Margin="30,10" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
-                <Rectangle Height="5" Width="30" Fill="Yellow">
+                <Rectangle Height="5" Width="30" Fill="#bddfef">
                     <Rectangle.LayoutTransform>
                         <RotateTransform Angle="-45"/>
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Rectangle Height="5" Width="30" Fill="Yellow">
+                <Rectangle Height="5" Width="30" Fill="#bddfef">
                     <Rectangle.LayoutTransform>
                         <RotateTransform Angle="45"/>
                     </Rectangle.LayoutTransform>
@@ -61,6 +64,10 @@
                 <WrapPanel Height="26">
                     <TextBlock Text="ФИО: " Width="46"/>
                     <TextBox Name="tbFullNameEmployee" Width="100"/>
+                </WrapPanel>
+                <WrapPanel Height="26">
+                    <TextBlock Text="Отдел: " Width="46"/>
+                    <TextBox Name="tbDepartmentEmployee" Width="100"/>
                 </WrapPanel>
                 <WrapPanel Height="30">
                     <TextBlock Text="Логин: " Width="46"/>
@@ -77,7 +84,7 @@
                         <ComboBoxItem IsSelected="True">Не полный</ComboBoxItem>
                     </ComboBox>
                 </WrapPanel>
-                <Button x:Name="btAddEmployee" Click="btAddEmployee_Click" Content="Добавить" Width="100" Margin="10"/>
+                <Button x:Name="btAddEmployee"  Style="{StaticResource BaseButton}" Click="btAddEmployee_Click" Content="Добавить" Width="100"/>
             </WrapPanel>
             <WrapPanel Name="panelDriver" Orientation="Vertical" Grid.Column ="1"  HorizontalAlignment="Center"  Grid.Row="1">
                 <TextBlock Name="tbTitleDriver" Text="Добавить водителя"  FontSize="16" FontWeight="Bold" Height="53"/>
@@ -89,7 +96,7 @@
                     <TextBlock Text="Телефон: "/>
                     <TextBox Name="tbMobilePhone" Width="100"/>
                 </WrapPanel>
-                <Button x:Name="btAddDriver" Click="btAddDriver_Click" Content="Добавить" Width="100" Margin="10"/>
+                <Button x:Name="btAddDriver" Style="{StaticResource BaseButton}" Click="btAddDriver_Click" Content="Добавить" Width="100" Margin="10"/>
             </WrapPanel>
         </Grid>
     </Grid>

@@ -5,24 +5,23 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
-    <Property Name="applicationDateAndTime" Type="nchar" MaxLength="100" Nullable="false" />
-    <Property Name="dateAndTimeOfCarProvision" Type="nchar" MaxLength="100" Nullable="false" />
-    <Property Name="purposesOfUsingAuto" Type="nchar" MaxLength="100" Nullable="false" />
-    <Property Name="route" Type="nchar" MaxLength="200" Nullable="false" />
-    <Property Name="nameDocument" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="applicationDateAndTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="dateAndTimeOfCarProvision" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="purposesOfUsingAuto" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="route" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="nameDocument" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="id_employe" Type="int" Nullable="false" />
     <Property Name="cargo" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="id_driver" Type="int" />
-    <Property Name="applicationStatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="applicationStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
       <PropertyRef Name="id_driver" />
     </Key>
     <Property Name="id_driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nchar" MaxLength="100" Nullable="false" />
-    <Property Name="mobilePhone" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="mobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="status" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
@@ -30,9 +29,10 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="login" Type="nchar" MaxLength="20" Nullable="false" />
-    <Property Name="fullName" Type="nchar" MaxLength="30" Nullable="false" />
-    <Property Name="password" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="login" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="department" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="accessRights" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Data_Driver">

@@ -10,24 +10,23 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="applicationDateAndTime" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="dateAndTimeOfCarProvision" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="purposesOfUsingAuto" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="route" Type="nchar" MaxLength="200" Nullable="false" />
-          <Property Name="nameDocument" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="applicationDateAndTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dateAndTimeOfCarProvision" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="purposesOfUsingAuto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="route" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="nameDocument" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="id_employe" Type="int" Nullable="false" />
           <Property Name="cargo" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="id_driver" Type="int" />
-          <Property Name="applicationStatus" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="applicationStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
             <PropertyRef Name="id_driver" />
           </Key>
           <Property Name="id_driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="mobilePhone" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="mobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
@@ -35,9 +34,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="login" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="fullName" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="password" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="department" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="accessRights" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Data_Driver">
@@ -86,16 +86,15 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="applicationDateAndTime" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="dateAndTimeOfCarProvision" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="route" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="applicationDateAndTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dateAndTimeOfCarProvision" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="route" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_employe" Type="Int32" Nullable="false" />
           <Property Name="cargo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="id_driver" Type="Int32" />
-          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="applicationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Data_Driver" FromRole="Data" ToRole="Driver" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_Data_Employees" FromRole="Data" ToRole="Employees" />
         </EntityType>
@@ -104,8 +103,8 @@
             <PropertyRef Name="id_driver" />
           </Key>
           <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="mobilePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Self.FK_Data_Driver" FromRole="Driver" ToRole="Data" />
         </EntityType>
@@ -114,11 +113,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="accessRights" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Data_Driver">
           <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
@@ -167,7 +167,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Data)">
         <MappingFragment StoreEntitySet="Data">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
           <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
           <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
@@ -193,7 +192,8 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Employees)">
         <MappingFragment StoreEntitySet="Employees">
-          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fullName" ColumnName="fullName" />
           <ScalarProperty Name="password" ColumnName="password" />

@@ -5,16 +5,15 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="applicationDateAndTime" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="dateAndTimeOfCarProvision" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="route" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="applicationDateAndTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dateAndTimeOfCarProvision" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="purposesOfUsingAuto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="route" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nameDocument" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="id_employe" Type="Int32" Nullable="false" />
     <Property Name="cargo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="id_driver" Type="Int32" />
-    <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="applicationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Driver" Relationship="Self.FK_Data_Driver" FromRole="Data" ToRole="Driver" />
     <NavigationProperty Name="Employees" Relationship="Self.FK_Data_Employees" FromRole="Data" ToRole="Employees" />
   </EntityType>
@@ -23,8 +22,8 @@
       <PropertyRef Name="id_driver" />
     </Key>
     <Property Name="id_driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="mobilePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="status" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Data" Relationship="Self.FK_Data_Driver" FromRole="Driver" ToRole="Data" />
   </EntityType>
@@ -33,11 +32,12 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fullName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="accessRights" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Data" Relationship="Self.FK_Data_Employees" FromRole="Employees" ToRole="Data" />
-    <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="login" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="department" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Data_Driver">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />

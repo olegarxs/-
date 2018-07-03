@@ -24,6 +24,7 @@ namespace Test
         public string password { get; set; }
         public bool accessRights { get; set; }
         public string login { get; set; }
+        public string department { get; set; }
     
         public virtual ICollection<Data> Data { get; set; }
     }

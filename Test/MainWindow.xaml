@@ -12,8 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="430"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -22,10 +22,10 @@
                 <MenuItem Header="Начальник" x:Name="btBoss" Click="btBoss_Click"></MenuItem>
                 <MenuItem Header="Водитель"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Менеджер пользователей"/>
+            <MenuItem x:Name="btManageUser" Click="btManageUser_Click" Header="Менеджер пользователей"/>
         </Menu>
         
-        <DataGrid Name="g1" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="1" SelectionChanged="g1_SelectionChanged">
+        <DataGrid Name="g1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" IsReadOnly="True"  Grid.Row="1" SelectionChanged="g1_SelectionChanged">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
@@ -40,7 +40,7 @@
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="ID"/>
-                <DataGridTextColumn Binding="{Binding name}" Header="Наименование подразделения"/>
+                <DataGridTextColumn Binding="{Binding Employees.department}" Header="Наименование подразделения"/>
                 <DataGridTextColumn Binding="{Binding applicationDateAndTime}" Header="Дата и время заказа" Width="150">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
@@ -61,6 +61,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <GroupBox Grid.Row="2" Header="Описание" Foreground="White" FontSize="16" Margin="10" Padding="10">
+            <GroupBox.Resources>
+                <Style TargetType="WrapPanel">
+                    <Setter Property="Margin" Value="0 0 0 3"/>
+                </Style>
+            </GroupBox.Resources>
             <StackPanel x:Name="editPanel">
                 <WrapPanel>
                 <TextBlock Text="ID" Name="ID"/>
@@ -105,7 +110,7 @@
             </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Водитель:"/>
-                    <ComboBox x:Name="epDriver" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id_driver" />
+                    <ComboBox x:Name="epDriver" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id_driver" MinWidth="100" />
                 </WrapPanel>
         </StackPanel>
         </GroupBox>

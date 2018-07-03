@@ -5,7 +5,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Data)">
         <MappingFragment StoreEntitySet="Data">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="applicationDateAndTime" ColumnName="applicationDateAndTime" />
           <ScalarProperty Name="dateAndTimeOfCarProvision" ColumnName="dateAndTimeOfCarProvision" />
           <ScalarProperty Name="purposesOfUsingAuto" ColumnName="purposesOfUsingAuto" />
@@ -31,6 +30,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="IsTypeOf(JournalDBModel.Employees)">
         <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="department" ColumnName="department" />
           <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fullName" ColumnName="fullName" />
