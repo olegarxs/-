@@ -51,7 +51,7 @@ namespace Test
                             Properties.Settings.Default.rights = 2;
                             Properties.Settings.Default.Save();
                         }
-
+                        
                         new MainWindow().Show();
                         check = true;
                         this.Close();

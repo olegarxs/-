@@ -77,3 +77,4 @@ D:\BSUIR\Belhudojpromblslabl\Test\obj\x86\Debug\Test.csproj.CopyComplete
 D:\BSUIR\Belhudojpromblslabl\Test\obj\x86\Debug\Test.exe
 D:\BSUIR\Belhudojpromblslabl\Test\obj\x86\Debug\Test.pdb
 C:\Users\Oleg\Desktop\fsd\Belhudojpromblslabl\Test\obj\x86\Debug\Design.baml
+D:\BSUIR\Belhudojpromblslabl\Test\obj\x86\Debug\Design.baml
