@@ -35,11 +35,11 @@
                 <ComboBoxItem>Доставка сотрудников</ComboBoxItem>
             </ComboBox>
             <TextBlock Text="Примечание по целям использования автомобиля"/>
-            <TextBox Name="tbCargo"  Height="50" TextWrapping="Wrap" />
+            <TextBox Name="tbCargo"  Height="50" VerticalContentAlignment="Top" TextWrapping="Wrap" />
             <TextBlock Text="Предпологаемый маршрут движения"/>
             <TextBox Name="tbRoute"/>
             <StackPanel Name="hide" Visibility="Collapsed">
-                <TextBlock Padding="5,0,0,0" Foreground="Black" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
+                <TextBlock Padding="5,0,0,0" Text="Сопроводительный документ по которому осуществляется перевозка груза(ТТН и Распоряжение)" TextWrapping="Wrap"/>
                 <TextBox Name="tbNameDocument" Margin="0,0,0,10"/>
             </StackPanel>
             <!--<TextBlock Content="Статус заказа:"/>

@@ -35,9 +35,15 @@ namespace Test
             d.purposesOfUsingAuto = cbPurposesOfUsingAuto.Text;
             d.cargo = tbCargo.Text;
             d.route = tbRoute.Text;
-            d.nameDocument = tbNameDocument.Text;
+            
             d.id_employe = Properties.Settings.Default.idUser;
-            d.nameDocument = "Нет";
+
+            if(tbCar.Text == "Грузовая")
+                d.nameDocument = tbNameDocument.Text;
+            else
+                d.nameDocument = "Нет";
+            
+            
             d.applicationStatus = "Не выполненно";
             db.Data.Add(d);
             db.SaveChanges();

@@ -20,9 +20,9 @@
         <Menu Grid.Row="0" VerticalAlignment="Top">
             <MenuItem Header="Войти как">
                 <MenuItem Header="Начальник" x:Name="btBoss" Click="btBoss_Click"></MenuItem>
-                <MenuItem Header="Водитель"></MenuItem>
+                <MenuItem Header="Водитель" x:Name="btDriver" Click="btDriver_Click"></MenuItem>
             </MenuItem>
-            <MenuItem x:Name="btManageUser" Click="btManageUser_Click" Header="Менеджер пользователей"/>
+            <MenuItem x:Name="btManageUser" Click="btManageUser_Click" Visibility="Collapsed" Header="Менеджер пользователей"/>
         </Menu>
         
         <DataGrid Name="g1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" IsReadOnly="True"  Grid.Row="1" SelectionChanged="g1_SelectionChanged">
@@ -90,15 +90,15 @@
             <WrapPanel Orientation="Vertical">
                 <TextBlock Text="Путь:"/>
                 <TextBox x:Name="epRoute" Width="361" Height="50"
-                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Название документа"/>
                 <TextBox x:Name="epNameDocument" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Text="Фамилия заказчика"/>
-                <TextBox x:Name="epLastName" Width="100"/>
+                <TextBlock Text="ФИО заказчика"/>
+                    <ComboBox x:Name="epLastName" ItemsSource="{Binding}" DisplayMemberPath="fullName" SelectedValuePath="id_employe" Width="150"/>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Груз"/>
@@ -121,8 +121,11 @@
             </Grid.ColumnDefinitions>-->
             <Button x:Name="addButton" Style="{StaticResource BaseButton}" Click="Button_Click"  Grid.Column="0" >Добавить запись</Button>
             <Button x:Name="editButton" Style="{StaticResource BaseButton}" Click="editButton_Click" Grid.Column="1" >Изменить</Button>
-            <Button x:Name="acceptOrderButton" Style="{StaticResource BaseButton}" Click="acceptOrderButton_Click">Принять заказ</Button>
-            
+            <StackPanel Orientation="Horizontal" Name="btBoxDriver">
+                 <Button x:Name="acceptOrderButton" Style="{StaticResource BaseButton}" Click="acceptOrderButton_Click" Tag="Выполняется">Принять заказ</Button>
+                <Button x:Name="fulfilledButton" Style="{StaticResource BaseButton}" Click="acceptOrderButton_Click" Content="Пометить как выполненный" FontSize="13" Background="Green" Tag="Выполнен"/>
+                <Button x:Name="didNotTakePlaceButton" Style="{StaticResource BaseButton}" Click="acceptOrderButton_Click" Content="Пометить как не состоялся" FontSize="14" Background="red" Tag="Не состоялся"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

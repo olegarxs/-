@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace Test
         public Entrance()
         {
             InitializeComponent();
+            Debug.Print(BoxTb.Children.Count.ToString());
+
         }
 
         public int id_employe;
@@ -31,8 +34,21 @@ namespace Test
         {
             JournalDBEntities db = new JournalDBEntities();
             bool check = false;
-
-
+            string pass = "1488";
+            if (tbLogin.Text == string.Empty)
+            {
+                if(tbPass.Password == pass)
+                {
+                    SaveProperty(1);
+                    new MainWindow().Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Не верный пароль");
+                }
+            }
+            else { 
             foreach (var item in db.Employees)
             {
                 if(item.login == tbLogin.Text)
@@ -41,22 +57,20 @@ namespace Test
                     {
                         Properties.Settings.Default.idUser = item.id;
 
+                        
                         if (item.accessRights == true)
                         {
-                            Properties.Settings.Default.rights = 3;
-                            Properties.Settings.Default.Save();
+                            SaveProperty(3);
                         }
                         else
                         {
-                            Properties.Settings.Default.rights = 2;
-                            Properties.Settings.Default.Save();
+                            SaveProperty(2);
                         }
-                        
+                       
                         new MainWindow().Show();
                         check = true;
                         this.Close();
                         break;
-                        
                     }
                 }
             }
@@ -64,6 +78,13 @@ namespace Test
             {
                 MessageBox.Show("Вы ввели неверный логин или пароль");
             }
+            }
+        }
+
+        private void SaveProperty(byte number)
+        {
+            Properties.Settings.Default.rights = number;
+            Properties.Settings.Default.Save();
         }
     }
 }

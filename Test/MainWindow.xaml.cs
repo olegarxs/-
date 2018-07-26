@@ -32,15 +32,22 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
+            UpdataTable();
+            //Properties.Settings.Default.rights = 1;
+            //Properties.Settings.Default.Save();
             checkProperty(Properties.Settings.Default.rights);
             //ID.Text = Properties.Settings.Default.rights.ToString();
-            Properties.Settings.Default.rights = 1;
-            Properties.Settings.Default.Save(); // для сохранение данных
-
-
+            // для сохранение данных
+            
+            
             //this.WindowState = WindowState.Maximized;  // для водителей
             //this.WindowStyle = System.Windows.WindowStyle.None;
         }
+
+        
+        
+        
+                                             
 
       
         private void checkProperty(int number)
@@ -74,12 +81,14 @@ namespace Test
             Boss
         }
 
-        public List<Driver> drivers { get; set; }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            drivers = db.Driver.ToList();
-            DataContext = drivers;
+            epDriver.DataContext = db.Driver.ToList();
+            
             epDriver.SelectedIndex = 0;
+
+            epLastName.DataContext = db.Employees.ToList();
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -87,11 +96,14 @@ namespace Test
             new AddElement().Show();
         }
 
-        public async Task UpdataTable()
+        public async void UpdataTable()
         {
-                var dataGrid = db.Data.ToList().AsEnumerable().Reverse().Take(10);
-                g1.ItemsSource = dataGrid;
-                await Task.Delay(5000);
+            while (true) {
+                                       
+                    g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse().Take(10);
+                    await Task.Delay(15000);
+                
+            }
         }
 
         private void btnUPDATE_Click(object sender, RoutedEventArgs e)
@@ -111,7 +123,7 @@ namespace Test
             epPurposesOfUsingAuto.Text = row.purposesOfUsingAuto.ToString();
             epRoute.Text = row.route.ToString();
             epNameDocument.Text = row.nameDocument.ToString();
-            epLastName.Text = row.Employees.fullName.ToString() ;
+            epLastName.Text = row.Employees.fullName.ToString();
             epCargo.Text = row.cargo.ToString();
             epDriver.SelectedValue =(row.id_driver is null) ? "0" : row.id_driver.Value.ToString();
             epApplicationStatus.Text = row.applicationStatus.ToString(); 
@@ -119,7 +131,7 @@ namespace Test
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            UpdataTable();
+            //UpdataTable();
         }
 
         private void ReadEditPanel(bool boolVar)
@@ -151,15 +163,17 @@ namespace Test
         {
             int cell = Convert.ToInt32(epID.Text);
             var cellEdit = db.Data.Where(w => w.id == cell).FirstOrDefault();  
-            cellEdit.applicationDateAndTime = epApplicationDateAndTime.Text;
-            cellEdit.dateAndTimeOfCarProvision = epDateAndTimeOfCarProvision.Text;
-            cellEdit.purposesOfUsingAuto = epPurposesOfUsingAuto.Text;
-            cellEdit.route = epRoute.Text;
-            cellEdit.nameDocument = epNameDocument.Text;
-            cellEdit.id_employe = int.Parse(epLastName.Text);
-            cellEdit.cargo = epCargo.Text;
-            cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
-            cellEdit.applicationStatus = "Выполняется";
+            
+            try
+            {
+                cellEdit.id_driver = int.Parse(epDriver.SelectedValue.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Выберите водителя");
+            }
+            
+            cellEdit.applicationStatus = (sender as Button).Tag.ToString();
             db.SaveChanges();
             g1.ItemsSource = db.Data.ToList().AsEnumerable().Reverse();
         }
@@ -175,6 +189,7 @@ namespace Test
             id_employe = Properties.Settings.Default.idUser;
             this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
             setting(true,Visibility.Visible,Visibility.Collapsed, Visibility.Collapsed,false);
+            
         }
 
         private void setting(bool onlyReadEditPanel,Visibility visibilityAddButton,
@@ -183,7 +198,7 @@ namespace Test
             ReadEditPanel(onlyReadEditPanel);
             addButton.Visibility = visibilityAddButton;
             editButton.Visibility = visibilityEditButton;
-            acceptOrderButton.Visibility = visibilityAcceptOrderButton;
+            btBoxDriver.Visibility = visibilityAcceptOrderButton;
             epDriver.IsEnabled = onlyReadCbDriver;
         }
 
@@ -192,6 +207,7 @@ namespace Test
             id_employe = Properties.Settings.Default.idUser;
             this.Title = "Добро пожаловать " + db.Employees.ToList().Where(x => x.id == id_employe).Select(x => x.fullName).First().ToString();
             setting(false, Visibility.Visible, Visibility.Visible, Visibility.Collapsed, true);
+            btManageUser.Visibility = Visibility.Visible;
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
@@ -213,7 +229,9 @@ namespace Test
 
         private void btBoss_Click(object sender, RoutedEventArgs e)
         {
+
             new Entrance().Show();
+            this.Close();
         }
 
         private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
@@ -234,6 +252,14 @@ namespace Test
         private void btManageUser_Click(object sender, RoutedEventArgs e)
         {
             new ManageUsers().Show();
+        }
+
+        private void btDriver_Click(object sender, RoutedEventArgs e)
+        {
+            Entrance entrance = new Entrance();
+            entrance.Show();
+            entrance.loginBox.Visibility = Visibility.Collapsed;
+            this.Close();
         }
     }
 }

@@ -25,18 +25,6 @@ namespace Test.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public byte rights {
-            get {
-                return ((byte)(this["rights"]));
-            }
-            set {
-                this["rights"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int idUser {
             get {
@@ -44,6 +32,18 @@ namespace Test.Properties {
             }
             set {
                 this["idUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte rights {
+            get {
+                return ((byte)(this["rights"]));
+            }
+            set {
+                this["rights"] = value;
             }
         }
     }
